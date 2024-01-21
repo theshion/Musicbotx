@@ -29,7 +29,7 @@ async def helper_private(
         _ = get_string(language)
         keyboard = help_pannel(_, True)
         await update.edit_message_text(
-            _["help_1"].format(SUPPORT_CHAT), reply_markup=keyboard
+            _["help_1"], reply_markup=keyboard
         )
     else:
         try:
@@ -41,7 +41,7 @@ async def helper_private(
         keyboard = help_pannel(_)
         await update.reply_photo(
             photo=START_IMG_URL,
-            caption=_["help_1"].format(SUPPORT_CHAT),
+            caption=_["help_1"],
             reply_markup=keyboard,
         )
 
@@ -104,7 +104,7 @@ async def exp_private(
         chat_id = update.message.chat.id
         language = await get_lang(chat_id)
         _ = get_string(language)
-        keyboard = exp_pannel(_, True)
+        keyboard = exp_panel(_, True)
         await update.edit_message_text(
             _["exp_1"].format(SUPPORT_CHAT), reply_markup=keyboard
         )
@@ -115,7 +115,7 @@ async def exp_private(
             pass
         language = await get_lang(update.chat.id)
         _ = get_string(language)
-        keyboard = exp_pannel(_)
+        keyboard = exp_panel(_)
         await update.reply_photo(
             photo=START_IMG_URL,
             caption=_["exp_1"],
