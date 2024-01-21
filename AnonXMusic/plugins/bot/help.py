@@ -156,10 +156,6 @@ async def exp_private(
         keyboard_buttons = exp_panel(_)
         keyboard_markup = InlineKeyboardMarkup(keyboard_buttons)
         await update.edit_message_text(_["exp_1"], reply_markup=keyboard_markup)
-
-        await update.edit_message_text(
-            _["exp_1"], reply_markup=keyboard
-        )
     else:
         try:
             await update.delete()
@@ -191,10 +187,6 @@ async def noah_private(
         keyboard_buttons = feature_panel(_)
         keyboard_markup = InlineKeyboardMarkup(keyboard_buttons)
         await update.edit_message_text(_["help_1"], reply_markup=keyboard_markup)
-
-        await update.edit_message_text(
-            _["exp_1"], reply_markup=keyboard
-        )
     else:
         try:
             await update.delete()
