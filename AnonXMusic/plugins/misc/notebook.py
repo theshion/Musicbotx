@@ -4,7 +4,6 @@ from PIL import Image, ImageDraw, ImageFont
 from pyrogram import filters
 
 from AnonXMusic import app
-from config import COMMAND_HANDLER
 
 
 def calculate_time(start_time, end_time):
@@ -30,7 +29,7 @@ def text_set(text):
 
 
 
-@app.on_message(filters.command(["write"], COMMAND_HANDLER))
+@app.on_message(filters.command("write"))
 async def handwrite(client, message):
     start_time = time()  # Record the start time
     if message.reply_to_message and message.reply_to_message.text:
