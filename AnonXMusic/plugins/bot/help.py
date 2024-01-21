@@ -8,7 +8,7 @@ from AnonXMusic.utils import help_pannel
 from AnonXMusic.utils.database import get_lang
 from AnonXMusic.utils.decorators.language import LanguageStart, languageCB
 from AnonXMusic.utils.inline.help import help_back_markup, private_help_panel
-from AnonXMusic.utils.inline.start import exp_panel
+from AnonXMusic.utils.inline.start import exp_panel, feature_panel
 from config import BANNED_USERS, START_IMG_URL, SUPPORT_CHAT
 from strings import get_string, helpers
 
@@ -122,5 +122,40 @@ async def exp_private(
         await update.reply_photo(
             photo=START_IMG_URL,
             caption=_["exp_1"],
+            reply_markup=keyboard,
+        )
+
+
+@app.on_callback_query(filters.regex("Noah_features") & ~BANNED_USERS)
+async def noah_private(
+    client: app, update: Union[types.Message, types.CallbackQuery]
+):
+    is_callback = isinstance(update, types.CallbackQuery)
+    if is_callback:
+        try:
+            await update.answer()
+        except:
+            pass
+        chat_id = update.message.chat.id
+        language = await get_lang(chat_id)
+        _ = get_string(language)
+        keyboard_buttons = feature_panel(_)
+        keyboard_markup = InlineKeyboardMarkup(keyboard_buttons)
+        await update.edit_message_text(_["help_1"], reply_markup=keyboard_markup)
+
+        await update.edit_message_text(
+            _["exp_1"], reply_markup=keyboard
+        )
+    else:
+        try:
+            await update.delete()
+        except:
+            pass
+        language = await get_lang(update.chat.id)
+        _ = get_string(language)
+        keyboard = feature_panel(_)
+        await update.reply_photo(
+            photo=START_IMG_URL,
+            caption=_["help_1"],
             reply_markup=keyboard,
         )
