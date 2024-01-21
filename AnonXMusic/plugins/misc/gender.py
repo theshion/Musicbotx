@@ -3,7 +3,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from AnonXMusic import app
 
-BUTTON = [[InlineKeyboardButton("ᴇɴʀɪᴄʜ ʏᴏᴜʀ ɢʀᴏᴜᴘ ɴᴏᴡ", url="https://t.me/Gojo_proxbot?startgroup=true")]]
+BUTTON = [[InlineKeyboardButton("ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ", url="https://t.me/Noah_Musicbot?startgroup=true")]]
 HOT_ANIMATION = "https://telegra.ph/file/5cd8d8e3865dd8480b8c4.mp4"
 CUTE_ANIMATION = "https://telegra.ph/file/2c978d637558612fcd4b9.mp4"
 COCK_ANIMATION = "https://telegra.ph/file/423414459345bf18310f5.gif"
