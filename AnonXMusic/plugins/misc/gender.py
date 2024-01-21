@@ -26,7 +26,7 @@ async def wish(_, message):
     text = message.text.split(None, 1)[1]
     wish_count = random.randint(1, 100)
     wish =  f"""
-    ⬝ **ʜᴇʏ {message.from_user.first_name}!**\n✨ **ʏᴏᴜʀ ᴡɪꜱʜ :** {text} \n🍀 **ᴘᴏꜱꜱɪʙʟᴇ ᴛᴏ:** {wish_count}%
+    🍂<b>ʜᴇʏ {message.from_user.first_name}\n✨ ʏᴏᴜʀ ᴡɪꜱʜ {text}\n🍀 ᴘᴏꜱꜱɪʙʟᴇ ᴛᴏ {wish_count}%</b>
     """
 
     await app.send_animation(message.chat.id, animation=url, caption=wish, reply_markup=InlineKeyboardMarkup(BUTTON))
@@ -77,7 +77,7 @@ async def horny(_, message):
     user_name = message.from_user.first_name
     mention = f"[{user_name}](tg://user?id={str(user_id)})"
     mm = random.randint(1, 100)
-    HORNY = f"**🔥** {mention} **ɪꜱ** {mm}**% ʜᴏʀɴʏ!**"
+    HORNY = f"🔥 <b>{mention} ɪꜱ {mm}% ʜᴏʀɴʏ.</b>"
     await app.send_animation(message.chat.id, animation=HOT_ANIMATION, caption=HORNY, reply_markup=InlineKeyboardMarkup(BUTTON))
 
 @app.on_message(filters.command("gay"))
@@ -86,7 +86,7 @@ async def gay(_, message):
     user_name = message.from_user.first_name
     mention = f"[{user_name}](tg://user?id={str(user_id)})"
     mm = random.randint(1, 100)
-    GAY = f"**🏳‍🌈** {mention} **ɪꜱ** {mm}**% ɢᴀʏ!**"
+    GAY = f"🏳‍🌈 <b>{mention} ɪꜱ {mm}% ɢᴀʏ.</b>"
     await app.send_animation(message.chat.id, animation=GAY_ANIMATION, caption=GAY, reply_markup=InlineKeyboardMarkup(BUTTON))
 
     
@@ -97,7 +97,7 @@ async def lezbian(_, message):
     user_name = message.from_user.first_name
     mention = f"[{user_name}](tg://user?id={str(user_id)})"
     mm = random.randint(1, 100)
-    LESBIAN = f"**🏳‍🌈** {mention} **ɪꜱ** {mm}**% ʟᴇꜱʙɪᴀɴ!**"
+    LESBIAN = f"🏳‍🌈 <b>{mention} ɪꜱ {mm}% ʟᴇꜱʙɪᴀɴ.</b>"
     await app.send_animation(message.chat.id, animation=LESBIAN_ANIMATION, caption=LESBIAN, reply_markup=InlineKeyboardMarkup(BUTTON))
    
     
@@ -107,7 +107,7 @@ async def boob(_, message):
     user_name = message.from_user.first_name
     mention = f"[{user_name}](tg://user?id={str(user_id)})"
     mm = random.randint(1, 100)
-    BOOBS = f"**🍒** {mention}**'ꜱ ʙᴏᴏʙꜱ ꜱɪᴢᴇ ɪꜱ** {mm}**!**"
+    BOOBS = f"🍒 <b>{mention}'ꜱ ʙᴏᴏʙꜱ ꜱɪᴢᴇ ɪꜱ {mm}.</b>"
     await app.send_animation(message.chat.id, animation=BOOBS_ANIMATION, caption=BOOBS, reply_markup=InlineKeyboardMarkup(BUTTON))
 
     
@@ -117,7 +117,7 @@ async def cock(_, message):
     user_name = message.from_user.first_name
     mention = f"[{user_name}](tg://user?id={str(user_id)})"
     mm = random.randint(1, 100)
-    COCK = f"**🍆** {mention}**'ꜱ ᴄᴏᴄᴋ ꜱɪᴢᴇ ɪꜱ** {mm}**ᴄᴍ**"
+    COCK = f"🍆 <b>{mention}'ꜱ ᴄᴏᴄᴋ ꜱɪᴢᴇ ɪꜱ {mm}ᴄᴍ.</b>"
     await app.send_animation(message.chat.id, animation=COCK_ANIMATION, caption=COCK, reply_markup=InlineKeyboardMarkup(BUTTON))
 
     
@@ -128,7 +128,7 @@ async def cute(_, message):
     user_name = message.from_user.first_name
     mention = f"[{user_name}](tg://user?id={str(user_id)})"
     mm = random.randint(1, 100)
-    CUTE = f"**✨** {mention} {mm}**% ᴄᴜᴛᴇ**"
+    CUTE = f"✨ <b>{mention} {mm}% ᴄᴜᴛᴇ.</b>"
     await app.send_animation(message.chat.id, animation=CUTE_ANIMATION, caption=CUTE, reply_markup=InlineKeyboardMarkup(BUTTON))
 
     
@@ -138,7 +138,7 @@ async def sigma(_, message):
     user_name = message.from_user.first_name
     mention = f"[{user_name}](tg://user?id={str(user_id)})"
     mm = random.randint(1, 100)
-    SIGMA = f"**🗿** {mention} **ɪꜱ** {mm}**% ꜱɪɢᴍᴀ!**"
+    SIGMA = f"🗿 <b>{mention} ɪꜱ {mm}% ꜱɪɢᴍᴀ.</b>"
     await app.send_animation(message.chat.id, animation=SIG_ANIMATION, caption=SIGMA, reply_markup=InlineKeyboardMarkup(BUTTON))
 
 
@@ -148,7 +148,7 @@ async def chad(_, message):
     user_name = message.from_user.first_name
     mention = f"[{user_name}](tg://user?id={str(user_id)})"
     mm = random.randint(1, 100)
-    CHAD = f"**🗿** {mention} **ɪꜱ** {mm}**% ᴄʜᴀᴅ!**"
+    CHAD = f"🗿 <b>{mention} ɪꜱ {mm}% ᴄʜᴀᴅ.</b>"
     await app.send_animation(message.chat.id, animation=CHAD_ANIMATION, caption=CHAD, reply_markup=InlineKeyboardMarkup(BUTTON))
     
 
@@ -158,7 +158,7 @@ async def batman(_, message):
     user_name = message.from_user.first_name
     mention = f"[{user_name}](tg://user?id={str(user_id)})"
     mm = random.randint(1, 100)
-    BATMAN = f"**🦇** {mention} **ɪꜱ** {mm}**% ʙᴀᴛᴍᴀɴ!**"
+    BATMAN = f"🦇 <b>{mention} ɪꜱ {mm}% ʙᴀᴛᴍᴀɴ.</b>"
     await app.send_animation(message.chat.id, animation=BAT_ANIMATION, caption=BATMAN, reply_markup=InlineKeyboardMarkup(BUTTON))
 
 
@@ -168,7 +168,7 @@ async def psycho(_, message):
     user_name = message .from_user.first_name
     mention = f"[{user_name}](tg://user?id={str(user_id)})"
     mm = random.randint(1, 100)
-    PSYCHO = f"**😈** {mention} **ɪꜱ** {mm}**% ᴘꜱʏᴄʜᴏ!**"
+    PSYCHO = f"😈 <b>{mention} ɪꜱ {mm}% ᴘꜱʏᴄʜᴏ.</b>"
     await app.send_animation(message.chat.id, animation=PSYCHO_ANIMATION, caption=PSYCHO, reply_markup=InlineKeyboardMarkup(BUTTON))
 
 
