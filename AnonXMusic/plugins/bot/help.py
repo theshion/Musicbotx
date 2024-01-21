@@ -29,7 +29,7 @@ async def helper_private(
         _ = get_string(language)
         keyboard = help_pannel(_, True)
         await update.edit_message_text(
-            _["help_1"], reply_markup=keyboard
+            _["chelp_1"], reply_markup=keyboard
         )
     else:
         try:
@@ -41,7 +41,7 @@ async def helper_private(
         keyboard = feature_panel(_)
         await update.reply_photo(
             photo=START_IMG_URL,
-            caption=_["help_1"],
+            caption=_["chelp_1"],
             reply_markup=keyboard,
         )
 
@@ -117,7 +117,7 @@ async def helper_private(
         _ = get_string(language)
         keyboard = ahelp_pannel(_, True)
         await update.edit_message_text(
-            _["help_1"], reply_markup=keyboard
+            _["ahelp_1"], reply_markup=keyboard
         )
     else:
         try:
@@ -129,7 +129,7 @@ async def helper_private(
         keyboard = feature_panel(_)
         await update.reply_photo(
             photo=START_IMG_URL,
-            caption=_["help_1"],
+            caption=_["ahelp_1"],
             reply_markup=keyboard,
         )
 
