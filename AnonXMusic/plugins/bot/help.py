@@ -38,7 +38,7 @@ async def helper_private(
             pass
         language = await get_lang(update.chat.id)
         _ = get_string(language)
-        keyboard = help_pannel(_)
+        keyboard = feature_pannel(_)
         await update.reply_photo(
             photo=START_IMG_URL,
             caption=_["help_1"],
