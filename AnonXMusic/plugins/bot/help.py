@@ -104,7 +104,7 @@ async def exp_private(
         chat_id = update.message.chat.id
         language = await get_lang(chat_id)
         _ = get_string(language)
-        keyboard = exp_panel(_, True)
+        keyboard = exp_panel(_)
         await update.edit_message_text(
             _["exp_1"].format(SUPPORT_CHAT), reply_markup=keyboard
         )
