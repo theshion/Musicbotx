@@ -106,6 +106,19 @@ def help_back_markup(_):
     return upl
 
 
+def ahelp_back_markup(_):
+    upl = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton(
+                    text=_["BACK_BUTTON"],
+                    callback_data=f"s.",
+                ),
+            ]
+        ]
+    )
+    return upl
+
 def private_help_panel(_):
     buttons = [
         [
