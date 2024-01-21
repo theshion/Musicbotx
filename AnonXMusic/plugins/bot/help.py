@@ -8,6 +8,7 @@ from AnonXMusic.utils import help_pannel
 from AnonXMusic.utils.database import get_lang
 from AnonXMusic.utils.decorators.language import LanguageStart, languageCB
 from AnonXMusic.utils.inline.help import help_back_markup, private_help_panel
+from AnonXMusic.utils.inline.start import exp_panel
 from config import BANNED_USERS, START_IMG_URL, SUPPORT_CHAT
 from strings import get_string, helpers
 
@@ -117,6 +118,6 @@ async def exp_private(
         keyboard = exp_pannel(_)
         await update.reply_photo(
             photo=START_IMG_URL,
-            caption=_["exp_1"].format(SUPPORT_CHAT),
+            caption=_["exp_1"],
             reply_markup=keyboard,
         )
