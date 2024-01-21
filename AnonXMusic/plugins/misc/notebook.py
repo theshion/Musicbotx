@@ -38,7 +38,7 @@ async def handwrite(client, message):
         txt = message.text.split(None, 1)[1]
     else:
         return await message.reply(
-            f"ʜᴇʏᴏ {message.from_user.mention} ɢɪᴠᴇ ꜱᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ᴡʀɪᴛᴇ ɪᴛ ᴏɴ ɴᴏᴛᴇ ʙᴏᴏᴋ.\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n⥤ ᴜꜱᴀɢᴇ :- /write Noah"
+            f"ʜᴇʏᴏ {message.from_user.mention} ɢɪᴠᴇ ꜱᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ᴡʀɪᴛᴇ ɪᴛ ᴏɴ ɴᴏᴛᴇ ʙᴏᴏᴋ.\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n⥤ ᴜꜱᴀɢᴇ :- <code>/write Noah</code>"
         )
     nan = await message.reply_text("ᴡʀɪᴛɪɴɢ ʏᴏᴜʀ ᴛᴇxᴛ ᴏɴ ɴᴏᴛᴇ-ʙᴏᴏᴋ\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\nᴊᴜꜱᴛ ᴡᴀɪᴛ ꜱᴏᴍᴇ ꜱᴇᴄᴏɴᴅꜱ...")
     try:
@@ -58,7 +58,7 @@ async def handwrite(client, message):
 
         if os.path.exists(file):
             await message.reply_photo(
-                photo=file, caption=f"""<b>⬝ sᴜᴄᴇssғᴜʟʟʏ ᴡʀɪᴛᴇ ʏᴏᴜʀ ᴛᴇxᴛ ᴏɴ ɴᴏᴛᴇ-ʙᴏᴏᴋ
+                photo=file, caption=f"""<b>⬝ sᴜᴄᴇssғᴜʟʟʏ ᴡʀɪᴛᴇ ʏᴏᴜʀ ᴛᴇxᴛ ᴏɴ ɴᴏᴛᴇ-ʙᴏᴏᴋ.
     ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ⬝ ᴡʀɪᴛᴛᴇɴ ʙʏ - {client.me.mention}
 ⬝ ǫᴜᴇʀʏ ʙʏ - {message.from_user.mention}
