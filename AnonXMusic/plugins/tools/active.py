@@ -11,34 +11,7 @@ from AnonXMusic.utils.database import (
     remove_active_video_chat,
 )
 
-from typing import Union
 
-from pyrogram import filters, types
-from pyrogram.types import InlineKeyboardMarkup, Message
-
-from AnonXMusic.utils import help_pannel, ahelp_pannel
-from AnonXMusic.utils.database import get_lang
-from AnonXMusic.utils.decorators.language import LanguageStart, languageCB
-from AnonXMusic.utils.inline.help import help_back_markup, ahelp_back_markup, private_help_panel
-from AnonXMusic.utils.inline.start import exp_panel, feature_panel
-from config import BANNED_USERS, START_IMG_URL, SUPPORT_CHAT
-from strings import get_string, helpers, ai
-
-
-@app.on_callback_query(filters.regex("ahelp_callback") & ~BANNED_USERS)
-@languageCB
-async def ahelper_cb(client, CallbackQuery, _):
-    callback_data = CallbackQuery.data.strip()
-    cb = callback_data.split(None, 1)[1]
-    keyboard = ahelp_back_markup(_)
-    if cb == "a1":
-        await CallbackQuery.edit_message_text(ai.AF_1, reply_markup=keyboard)
-    elif cb == "a2":
-        await CallbackQuery.edit_message_text(ai.AF_2, reply_markup=keyboard)
-    elif cb == "a3":
-        await CallbackQuery.edit_message_text(ai.AF_3, reply_markup=keyboard)
-    elif cb == "a4":
-        await CallbackQuery.edit_message_text(ai.AF_4, reply_markup=keyboard)
 
 
 
