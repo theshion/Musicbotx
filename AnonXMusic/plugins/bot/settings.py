@@ -5,6 +5,8 @@ from pyrogram.types import (
     CallbackQuery,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
+    InputMediaPhoto,
+    InputMediaVideo,
     Message,
 )
 
