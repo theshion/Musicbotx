@@ -112,7 +112,7 @@ def ahelp_back_markup(_):
             [
                 InlineKeyboardButton(
                     text=_["BACK_BUTTON"],
-                    callback_data=f"s.",
+                    callback_data=f"ai_features",
                 ),
             ]
         ]
