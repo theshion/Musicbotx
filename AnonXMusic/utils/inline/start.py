@@ -4,6 +4,8 @@ import config
 from AnonXMusic import app
 
 
+
+
 def start_panel(_):
     buttons = [
         [
@@ -26,7 +28,7 @@ def private_panel(_):
         ],
         [
             InlineKeyboardButton(text=_["S_B_70"], callback_data="exp_helper"),
-            InlineKeyboardButton(text=_["S_B_7"], url=config.SUPPORT_CHAT),    
+            InlineKeyboardButton(text=_["S_B_7"], callback_data="source_helper"),   
         ],
         [
             InlineKeyboardButton(text=_["S_B_4"], callback_data="settings_back_helper"),
