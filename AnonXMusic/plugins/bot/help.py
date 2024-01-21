@@ -91,6 +91,55 @@ async def helper_cb(client, CallbackQuery, _):
         await CallbackQuery.edit_message_text(helpers.HELP_15, reply_markup=keyboard)
 
 
+
+@app.on_message(filters.command(["ahelp"]) & filters.private & ~BANNED_USERS)
+@app.on_callback_query(filters.regex("ai_features") & ~BANNED_USERS)
+async def helper_private(
+    client: app, update: Union[types.Message, types.CallbackQuery]
+):
+    is_callback = isinstance(update, types.CallbackQuery)
+    if is_callback:
+        try:
+            await update.answer()
+        except:
+            pass
+        chat_id = update.message.chat.id
+        language = await get_lang(chat_id)
+        _ = get_string(language)
+        keyboard = ahelp_pannel(_, True)
+        await update.edit_message_text(
+            _["help_1"], reply_markup=keyboard
+        )
+    else:
+        try:
+            await update.delete()
+        except:
+            pass
+        language = await get_lang(update.chat.id)
+        _ = get_string(language)
+        keyboard = feature_pannel(_)
+        await update.reply_photo(
+            photo=START_IMG_URL,
+            caption=_["help_1"],
+            reply_markup=keyboard,
+        )
+
+@app.on_callback_query(filters.regex("ahelp_callback") & ~BANNED_USERS)
+@languageCB
+async def helper_cb(client, CallbackQuery, _):
+    callback_data = CallbackQuery.data.strip()
+    cb = callback_data.split(None, 1)[1]
+    keyboard = ahelp_back_markup(_)
+    if cb == "a1":
+        await CallbackQuery.edit_message_text(ai.AF_1, reply_markup=keyboard)
+    elif cb == "a2":
+        await CallbackQuery.edit_message_text(ai.AF_2, reply_markup=keyboard)
+    elif cb == "a3":
+        await CallbackQuery.edit_message_text(ai.AF_3, reply_markup=keyboard)
+    elif cb == "a4":
+        await CallbackQuery.edit_message_text(ai.AF_4, reply_markup=keyboard)
+
+
 @app.on_callback_query(filters.regex("exp_helper") & ~BANNED_USERS)
 async def exp_private(
     client: app, update: Union[types.Message, types.CallbackQuery]
@@ -159,52 +208,3 @@ async def noah_private(
             caption=_["help_1"],
             reply_markup=keyboard,
         )
-
-app.on_message(filters.command(["ahelp"]) & filters.private & ~BANNED_USERS)
-@app.on_callback_query(filters.regex("ai_features") & ~BANNED_USERS)
-async def helper_private(
-    client: app, update: Union[types.Message, types.CallbackQuery]
-):
-    is_callback = isinstance(update, types.CallbackQuery)
-    if is_callback:
-        try:
-            await update.answer()
-        except:
-            pass
-        chat_id = update.message.chat.id
-        language = await get_lang(chat_id)
-        _ = get_string(language)
-        keyboard = ahelp_pannel(_, True)
-        await update.edit_message_text(
-            _["help_1"], reply_markup=keyboard
-        )
-    else:
-        try:
-            await update.delete()
-        except:
-            pass
-        language = await get_lang(update.chat.id)
-        _ = get_string(language)
-        keyboard = feature_pannel(_)
-        await update.reply_photo(
-            photo=START_IMG_URL,
-            caption=_["help_1"],
-            reply_markup=keyboard,
-        )
-
-@app.on_callback_query(filters.regex("ahelp_callback") & ~BANNED_USERS)
-@languageCB
-async def helper_cb(client, CallbackQuery, _):
-    callback_data = CallbackQuery.data.strip()
-    cb = callback_data.split(None, 1)[1]
-    keyboard = ahelp_back_markup(_)
-    if cb == "a1":
-        await CallbackQuery.edit_message_text(ai.AF_1, reply_markup=keyboard)
-    elif cb == "a2":
-        await CallbackQuery.edit_message_text(ai.AF_2, reply_markup=keyboard)
-    elif cb == "a3":
-        await CallbackQuery.edit_message_text(ai.AF_3, reply_markup=keyboard)
-    elif cb == "a4":
-        await CallbackQuery.edit_message_text(ai.AF_4, reply_markup=keyboard)
-
-
