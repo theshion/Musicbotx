@@ -26,7 +26,7 @@ def private_panel(_):
         ],
         [
             InlineKeyboardButton(text=_["S_B_70"], callback_data="exp_helper"),
-            InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_CHAT),    
+            InlineKeyboardButton(text=_["S_B_7"], url=config.SUPPORT_CHAT),    
         ],
         [
             InlineKeyboardButton(text=_["S_B_4"], callback_data="settings_back_helper"),
@@ -39,7 +39,7 @@ def exp_panel(_):
     buttons = [
         [
             InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_CHAT),   
-            InlineKeyboardButton(text=_["S_B_69"], callback_data="settings_exp_helper"),
+            InlineKeyboardButton(text=_["S_B_69"], url=config.SUPPORT_CHANNEL),
         ],
         [ 
             InlineKeyboardButton(text=_["BACK_BUTTON"], callback_data=f"settingsback_helper"),
