@@ -96,8 +96,8 @@ async def settings_back_markup(client, CallbackQuery: CallbackQuery, _):
                 media=image,
                 _["start_2"].format(CallbackQuery.from_user.mention, app.mention),
                 reply_markup=InlineKeyboardMarkup(buttons),
-              ),
-         )
+            ),
+        )
     else:
         buttons = setting_markup(_)
         return await CallbackQuery.edit_message_reply_markup(
