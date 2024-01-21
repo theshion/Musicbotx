@@ -31,7 +31,7 @@ def private_panel(_):
             InlineKeyboardButton(text=_["S_B_7"], callback_data="source_helper"),   
         ],
         [
-            InlineKeyboardButton(text=_["S_B_4"], callback_data="settings_back_helper"),
+            InlineKeyboardButton(text=_["S_B_4"], callback_data="Noah_features"),
         ],
     ]
     return buttons
@@ -42,6 +42,19 @@ def exp_panel(_):
         [
             InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_CHAT),   
             InlineKeyboardButton(text=_["S_B_69"], url=config.SUPPORT_CHANNEL),
+        ],
+        [ 
+            InlineKeyboardButton(text=_["BACK_BUTTON"], callback_data=f"settingsback_helper"),
+        ],
+    ]
+    return buttons
+
+
+def feature_panel(_):
+    buttons = [
+        [
+            InlineKeyboardButton(text=_["F_1"], callback_data="settings_back_helper"),
+            InlineKeyboardButton(text=_["F_2"], callback_data="ai_features"),
         ],
         [ 
             InlineKeyboardButton(text=_["BACK_BUTTON"], callback_data=f"settingsback_helper"),
