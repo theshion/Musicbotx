@@ -116,3 +116,41 @@ def private_help_panel(_):
         ],
     ]
     return buttons
+
+
+def ahelp_pannel(_, START: Union[bool, int] = None):
+    first = [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data=f"close")]
+    second = [
+        InlineKeyboardButton(
+            text=_["BACK_BUTTON"],
+            callback_data=f"settingsback_helper",
+        ),
+    ]
+    mark = second if START else first
+    ai = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton(
+                    text=_["AI_1"],
+                    callback_data="ahelp_callback a1",
+                ),
+                InlineKeyboardButton(
+                    text=_["AI_2"],
+                    callback_data="ahelp_callback a2",
+                ),
+                InlineKeyboardButton(
+                    text=_["AI_3"],
+                    callback_data="ahelp_callback a3",
+                ),
+            ],
+            [
+                InlineKeyboardButton(
+                    text=_["AI_4"],
+                    callback_data="ahelp_callback a4",
+                ),
+            ],
+            mark,
+        ]
+    )
+    return ai
+
