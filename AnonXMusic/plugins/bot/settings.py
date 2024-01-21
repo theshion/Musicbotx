@@ -89,11 +89,15 @@ async def settings_back_markup(client, CallbackQuery: CallbackQuery, _):
     if CallbackQuery.message.chat.type == ChatType.PRIVATE:
         await app.resolve_peer(OWNER_ID)
         OWNER = OWNER_ID
+        image = config.START_IMG_URL
         buttons = private_panel(_)
-        return await CallbackQuery.edit_message_text(
+        await CallbackQuery.edit_message_media(
+            InputMediaPhoto(
+                media=image,
             _["start_2"].format(CallbackQuery.from_user.mention, app.mention),
             reply_markup=InlineKeyboardMarkup(buttons),
-        )
+        ),
+       )
     else:
         buttons = setting_markup(_)
         return await CallbackQuery.edit_message_reply_markup(
