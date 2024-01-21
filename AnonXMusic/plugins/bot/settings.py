@@ -67,6 +67,16 @@ async def settings_cb(client, CallbackQuery, _):
     )
 
 
+@app.on_callback_query(filters.regex("source_helper") & ~BANNED_USERS)
+@languageCB
+async def source_helper(client, CallbackQuery, _):
+    await CallbackQuery.edit_message_media(
+        InputMediaVideo("https://te.legra.ph/file/0a10ff4d3fe9d6cb52520.mp4"),
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton(text="🔙 ʙᴀᴄᴋ", callback_data=f"settingsback_helper")]]
+        ),
+    )
+
 @app.on_callback_query(filters.regex("settingsback_helper") & ~BANNED_USERS)
 @languageCB
 async def settings_back_markup(client, CallbackQuery: CallbackQuery, _):
