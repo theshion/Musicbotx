@@ -88,3 +88,35 @@ async def helper_cb(client, CallbackQuery, _):
         await CallbackQuery.edit_message_text(helpers.HELP_14, reply_markup=keyboard)
     elif cb == "hb15":
         await CallbackQuery.edit_message_text(helpers.HELP_15, reply_markup=keyboard)
+
+
+@app.on_callback_query(filters.regex("exp_helper") & ~BANNED_USERS)
+async def exp_private(
+    client: app, update: Union[types.Message, types.CallbackQuery]
+):
+    is_callback = isinstance(update, types.CallbackQuery)
+    if is_callback:
+        try:
+            await update.answer()
+        except:
+            pass
+        chat_id = update.message.chat.id
+        language = await get_lang(chat_id)
+        _ = get_string(language)
+        keyboard = exp_pannel(_, True)
+        await update.edit_message_text(
+            _["exp_1"].format(SUPPORT_CHAT), reply_markup=keyboard
+        )
+    else:
+        try:
+            await update.delete()
+        except:
+            pass
+        language = await get_lang(update.chat.id)
+        _ = get_string(language)
+        keyboard = exp_pannel(_)
+        await update.reply_photo(
+            photo=START_IMG_URL,
+            caption=_["exp_1"].format(SUPPORT_CHAT),
+            reply_markup=keyboard,
+        )
