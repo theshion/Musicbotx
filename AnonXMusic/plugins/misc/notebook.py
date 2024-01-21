@@ -8,7 +8,7 @@ from AnonXMusic import app
 
 def calculate_time(start_time, end_time):
     elapsed_time = end_time - start_time
-    return f"**{elapsed_time:.2f} ꜱᴇᴄᴏɴᴅꜱ**"
+    return f"{elapsed_time:.2f} ꜱᴇᴄᴏɴᴅꜱ"
 
 
 
@@ -38,7 +38,7 @@ async def handwrite(client, message):
         txt = message.text.split(None, 1)[1]
     else:
         return await message.reply(
-            f"ʜᴇʏᴏ {message.from_user.mention} ɢɪᴠᴇ ꜱᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ᴡʀɪᴛᴇ ɪᴛ ᴏɴ ɴᴏᴛᴇ ʙᴏᴏᴋ.\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n⥤ ᴜꜱᴀɢᴇ :-`/write Noah`"
+            f"ʜᴇʏᴏ {message.from_user.mention} ɢɪᴠᴇ ꜱᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ᴡʀɪᴛᴇ ɪᴛ ᴏɴ ɴᴏᴛᴇ ʙᴏᴏᴋ.\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n⥤ ᴜꜱᴀɢᴇ :- /write Noah"
         )
     nan = await message.reply_text("ᴡʀɪᴛɪɴɢ ʏᴏᴜʀ ᴛᴇxᴛ ᴏɴ ɴᴏᴛᴇ-ʙᴏᴏᴋ\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\nᴊᴜꜱᴛ ᴡᴀɪᴛ ꜱᴏᴍᴇ ꜱᴇᴄᴏɴᴅꜱ...")
     try:
