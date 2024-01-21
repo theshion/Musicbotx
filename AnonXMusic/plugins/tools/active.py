@@ -12,6 +12,24 @@ from AnonXMusic.utils.database import (
 )
 
 
+
+@app.on_callback_query(filters.regex("ahelp_callback") & ~BANNED_USERS)
+@languageCB
+async def ahelper_cb(client, CallbackQuery, _):
+    callback_data = CallbackQuery.data.strip()
+    cb = callback_data.split(None, 1)[1]
+    keyboard = ahelp_back_markup(_)
+    if cb == "a1":
+        await CallbackQuery.edit_message_text(ai.AF_1, reply_markup=keyboard)
+    elif cb == "a2":
+        await CallbackQuery.edit_message_text(ai.AF_2, reply_markup=keyboard)
+    elif cb == "a3":
+        await CallbackQuery.edit_message_text(ai.AF_3, reply_markup=keyboard)
+    elif cb == "a4":
+        await CallbackQuery.edit_message_text(ai.AF_4, reply_markup=keyboard)
+
+
+
 @app.on_message(filters.command(["activevc", "activevoice"]) & SUDOERS)
 async def activevc(_, message: Message):
     mystic = await message.reply_text("» ɢᴇᴛᴛɪɴɢ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛs ʟɪsᴛ...")
