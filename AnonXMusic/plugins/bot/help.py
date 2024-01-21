@@ -126,7 +126,7 @@ async def helper_private(
 
 @app.on_callback_query(filters.regex("ahelp_callback") & ~BANNED_USERS)
 @languageCB
-async def helper_cb(client, CallbackQuery, _):
+async def ahelper_cb(client, CallbackQuery, _):
     callback_data = CallbackQuery.data.strip()
     cb = callback_data.split(None, 1)[1]
     keyboard = ahelp_back_markup(_)
