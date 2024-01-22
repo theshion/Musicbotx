@@ -1,6 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from config import LOG_GROUP_ID
+from config import LOGGER_ID
 from AnonXMusic import app
 
 
@@ -14,4 +14,4 @@ async def on_new_chat_members(client: Client, message: Message):
         title = message.chat.title
         chat_id = message.chat.id
         xix = f"⌯ <u>ɴᴇᴡ ɢʀᴏᴜᴘ</u>⥮\n\n⬝ ᴄʜᴀᴛ ᴛɪᴛʟᴇ {title}\n⬝ ᴄʜᴀᴛ ɪᴅ {chat_id}\n⬝ ᴀᴅᴅᴇᴅ ʙʏ {added_by}"
-        await new_message(LOG_GROUP_ID, xix)
+        await new_message(LOGGER_ID, xix)
