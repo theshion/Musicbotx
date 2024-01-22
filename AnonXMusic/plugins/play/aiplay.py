@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from AnonXMusic.core.call import Anony
-from AnonXMusic import spotify, app
+from AnonXMusic import Spotify, app
 from spotipy.oauth2 import SpotifyOAuth
 
 
@@ -49,7 +49,7 @@ def button_callback(_, callback_query):
         playlist_id = SPOTIFY_PLAYLISTS.get(playlist_name)
 
         # Get the first track from the selected Spotify playlist
-        playlist_tracks = spotify.playlist_tracks(playlist_id)
+        playlist_tracks = Spotify.playlist_tracks(playlist_id)
         track_url = playlist_tracks['items'][0]['track']['external_urls']['spotify']
 
         # Start playing the track on the voice chat
