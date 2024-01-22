@@ -1,13 +1,13 @@
-from pyrogram import Client, filters
+ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from AnonXMusic.core.call import Anony
 from AnonXMusic import Spotify, app
 from spotipy.oauth2 import SpotifyOAuth
 
 SPOTIFY_PLAYLISTS = {
-    'English': 'https://open.spotify.com/playlist/0rAdSPycrFdaBXh9xSW3ap?si=hCVorPfNT8Ci_Uhzicx8qA',
-    'Hindi': 'https://open.spotify.com/playlist/0XSjIw422sAwiKUMq4cm2l?si=pTIt8-UhQ7OebaiCt5wM7A',
-    'OtherLanguages': 'https://open.spotify.com/artist/3kXvE7gEBfGkwDaknMngF7?si=VhIgr9TXRIa9_FJGgGr99A'
+    'English': '0rAdSPycrFdaBXh9xSW3ap',
+    'Hindi': '0XSjIw422sAwiKUMq4cm2l',
+    'OtherLanguages': '3kXvE7gEBfGkwDaknMngF7'
 }
 
 @app.on_message(filters.command("aiplay"))
@@ -37,11 +37,11 @@ def button_callback(_, callback_query):
         user_id = callback_query.from_user.id
         playlist_name = callback_query.data
 
-        # Get the playlist URL based on the user's choice
-        playlist_url = SPOTIFY_PLAYLISTS.get(playlist_name)
+        # Get the playlist ID based on the user's choice
+        playlist_id = SPOTIFY_PLAYLISTS.get(playlist_name)
 
         # Get the first track from the selected Spotify playlist
-        playlist_tracks = Spotify.playlist_tracks(playlist_url)
+        playlist_tracks = Spotify.playlist_items(playlist_id)
         track_url = playlist_tracks['items'][0]['track']['external_urls']['spotify']
 
         # Start playing the track on the voice chat
@@ -50,4 +50,4 @@ def button_callback(_, callback_query):
 
     except Exception as e:
         print(f"Error: {e}")
-        callback_query.message.reply_text("An error occurred while processing your request.")
+        
