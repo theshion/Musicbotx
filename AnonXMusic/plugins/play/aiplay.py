@@ -1,10 +1,31 @@
+import random
+import string
+
 from pyrogram import filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from AnonXMusic import Spotify, app
+from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message
+from pytgcalls.exceptions import NoActiveGroupCall
 
-# Assuming you have the necessary functions and configurations for Spotify in your AnonXMusic module
+import config
+from AnonXMusic import Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app
+from AnonXMusic.core.call import Anony
+from AnonXMusic.utils import seconds_to_min, time_to_seconds
+from AnonXMusic.utils.channelplay import get_channeplayCB
+from AnonXMusic.utils.decorators.language import languageCB
+from AnonXMusic.utils.decorators.play import PlayWrapper
+from AnonXMusic.utils.formatters import formats
+from AnonXMusic.utils.inline import (
+    botplaylist_markup,
+    livestream_markup,
+    playlist_markup,
+    slider_markup,
+    track_markup,
+)
+from AnonXMusic.utils.logger import play_logs
+from AnonXMusic.utils.stream.stream import stream
+from config import BANNED_USERS, lyrical
 
-@filters.command("aiplay")
+
+@app.on_message(filters.command("aiplay"))
 async def aiplay_command(client, message):
     buttons = [
         [
