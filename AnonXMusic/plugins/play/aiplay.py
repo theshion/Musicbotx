@@ -6,9 +6,9 @@ from spotipy.oauth2 import SpotifyOAuth
 
 
 SPOTIFY_PLAYLISTS = {
-    'English': 'english_playlist_id',
-    'Hindi': 'hindi_playlist_id',
-    'OtherLanguages': 'other_languages_playlist_id'
+    'English': 'https://open.spotify.com/playlist/0rAdSPycrFdaBXh9xSW3ap?si=hCVorPfNT8Ci_Uhzicx8qA',
+    'Hindi': 'https://open.spotify.com/playlist/0XSjIw422sAwiKUMq4cm2l?si=pTIt8-UhQ7OebaiCt5wM7A',
+    'OtherLanguages': 'https://open.spotify.com/artist/3kXvE7gEBfGkwDaknMngF7?si=VhIgr9TXRIa9_FJGgGr99A'
 }
 
 
@@ -32,7 +32,7 @@ def aiplay(_, msg):
         ]
 
         # Send the buttons to the user
-        msg.reply_text("Select a playlist:", reply_markup=InlineKeyboardMarkup(buttons))
+        msg.reply_text("ᴄʜᴏᴏꜱᴇ ꜰʀᴏᴍ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴꜱ", reply_markup=InlineKeyboardMarkup(buttons))
 
     except Exception as e:
         print(f"Error: {e}")
@@ -54,11 +54,9 @@ def button_callback(_, callback_query):
 
         # Start playing the track on the voice chat
         Anony.join_group_call(chat_id, user_id, audio_file=track_url)
-        callback_query.message.reply_text(f"Playing song from {playlist_name} playlist")
+        callback_query.message.reply_text(f"➲ <u>ᴀɪ-ᴘʟᴀʏᴇʀ ꜱᴛᴀʀᴛᴇᴅ</u>\n⬝ ɴᴏᴡ ᴘʟᴀʏɪɴɢ {playlist_name}\n⬝ ợᴜᴇʀʏ ʙʏ - {callback_query.from_user.mention}\n⬝ ꜱᴛʀᴇᴀᴍᴇᴅ ʙʏ - ɴᴏᴀʜ ᴍᴜꜱɪᴄ")
 
     except Exception as e:
         print(f"Error: {e}")
         callback_query.message.reply_text("An error occurred while processing your request.")
 
-if __name__ == "__main__":
-    pytgcalls.run()
