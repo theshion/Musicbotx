@@ -63,6 +63,6 @@ async def play_spotify_playlist(user_id, spotify_url):
     # Replace with your logic to play Spotify playlists
     try:
         # Call the function from your AnonXMusic module to play Spotify playlist
-        await Anony.stream_call(user_id, spotify_url)
+        await Anony.stream_call(spotify_url)
     except Exception as e:
         print(f"Error playing playlist: {e}")
