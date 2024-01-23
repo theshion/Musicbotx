@@ -1,25 +1,24 @@
 import os
 import re
 import textwrap
-
+import numpy as np
 import aiofiles
 import aiohttp
-import numpy as np
-
 from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter, ImageFont
-from youtubesearchpython.__future__ import VideosSearch
+from youtubesearchpython import VideosSearch
+from pyrogram import Client
 
 from config import YOUTUBE_IMG_URL
 from AnonXMusic import app
 
 
-def changeImageSize(maxWidth, maxHeight, image):
-    widthRatio = maxWidth / image.size[0]
-    heightRatio = maxHeight / image.size[1]
-    newWidth = int(widthRatio * image.size[0])
-    newHeight = int(heightRatio * image.size[1])
-    newImage = image.resize((newWidth, newHeight))
-    return newImage
+async def change_image_size(max_width, max_height, image):
+    width_ratio = max_width / image.size[0]
+    height_ratio = max_height / image.size[1]
+    new_width = int(width_ratio * image.size[0])
+    new_height = int(height_ratio * image.size[1])
+    new_image = image.resize((new_width, new_height))
+    return new_image
 
 
 def add_corners(im):
@@ -34,47 +33,34 @@ def add_corners(im):
 async def get_thumb(videoid, user_id):
     if os.path.isfile(f"cache/{videoid}_{user_id}.png"):
         return f"cache/{videoid}_{user_id}.png"
+    
     url = f"https://www.youtube.com/watch?v={videoid}"
+    
     try:
         results = VideosSearch(url, limit=1)
-        for result in (await results.next())["result"]:
-            try:
-                title = result["title"]
-                title = re.sub("\W+", " ", title)
-                title = title.title()
-            except:
-                title = "Unsupported Title"
-            try:
-                duration = result["duration"]
-            except:
-                duration = "Unknown"
-            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
-            try:
-                result["viewCount"]["short"]
-            except:
-                pass
-            try:
-                result["channel"]["name"]
-            except:
-                pass
+        result = (await results.next())["result"][0]
+
+        title = re.sub("\W+", " ", result["title"]).title() if "title" in result else "Unsupported Title"
+        duration = result["duration"] if "duration" in result else "Unknown"
+        thumbnail = result["thumbnails"][0]["url"].split("?")[0]
 
         async with aiohttp.ClientSession() as session:
             async with session.get(thumbnail) as resp:
                 if resp.status == 200:
-                    f = await aiofiles.open(f"cache/thumb{videoid}.png", mode="wb")
-                    await f.write(await resp.read())
-                    await f.close()
+                    async with aiofiles.open(f"cache/thumb{videoid}.png", mode="wb") as f:
+                        await f.write(await resp.read())
 
         try:
-            wxyz = await app.get_profile_photos(user_id)
-            wxy = await app.download_media(wxyz[0]['file_id'], file_name=f'{user_id}.jpg')
+            profile_photos = await app.get_profile_photos(user_id)
+            wxy = await app.download_media(profile_photos[0]['file_id'], file_name=f'{user_id}.jpg')
         except:
             hehe = await app.get_profile_photos(app.id)
             wxy = await app.download_media(hehe[0]['file_id'], file_name=f'{app.id}.jpg')
+
         xy = Image.open(wxy)
         a = Image.new('L', [740, 740], 0)
         b = ImageDraw.Draw(a)
-        b.pieslice([(0, 0), (740,740)], 0, 360, fill = 255, outline = "white")
+        b.pieslice([(0, 0), (740, 740)], 0, 360, fill=255, outline="white")
         c = np.array(xy)
         d = np.array(a)
         e = np.dstack((c, d))
@@ -82,14 +68,14 @@ async def get_thumb(videoid, user_id):
         x = f.resize((107, 107))
 
         youtube = Image.open(f"cache/thumb{videoid}.png")
-        bg = Image.open(f"AnonXMusic/assets/anonx.png")
-        image1 = changeImageSize(1280, 720, youtube)
+        bg = Image.open("AnonXMusic/assets/anonx.png")
+        image1 = await change_image_size(1280, 720, youtube)
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(30))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.6)
 
-        image3 = changeImageSize(1280, 720, bg)
+        image3 = await change_image_size(1280, 720, bg)
         image5 = image3.convert("RGBA")
         Image.alpha_composite(background, image5).save(f"cache/temp{videoid}.png")
 
@@ -125,7 +111,7 @@ async def get_thumb(videoid, user_id):
         try:
             draw.text(
                 (450000, 25),
-                f"STARTED PLAYING",
+                "STARTED PLAYING",
                 fill="white",
                 stroke_width=3,
                 stroke_fill="grey",
@@ -174,47 +160,34 @@ async def get_thumb(videoid, user_id):
 async def gen_qthumb(videoid, user_id):
     if os.path.isfile(f"cache/que{videoid}_{user_id}.png"):
         return f"cache/que{videoid}_{user_id}.png"
+    
     url = f"https://www.youtube.com/watch?v={videoid}"
+
     try:
         results = VideosSearch(url, limit=1)
-        for result in (await results.next())["result"]:
-            try:
-                title = result["title"]
-                title = re.sub("\W+", " ", title)
-                title = title.title()
-            except:
-                title = "Unsupported Title"
-            try:
-                duration = result["duration"]
-            except:
-                duration = "Unknown"
-            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
-            try:
-                result["viewCount"]["short"]
-            except:
-                pass
-            try:
-                result["channel"]["name"]
-            except:
-                pass
+        result = (await results.next())["result"][0]
+
+        title = re.sub("\W+", " ", result["title"]).title() if "title" in result else "Unsupported Title"
+        duration = result["duration"] if "duration" in result else "Unknown"
+        thumbnail = result["thumbnails"][0]["url"].split("?")[0]
 
         async with aiohttp.ClientSession() as session:
             async with session.get(thumbnail) as resp:
                 if resp.status == 200:
-                    f = await aiofiles.open(f"cache/thumb{videoid}.png", mode="wb")
-                    await f.write(await resp.read())
-                    await f.close()
+                    async with aiofiles.open(f"cache/thumb{videoid}.png", mode="wb") as f:
+                        await f.write(await resp.read())
 
         try:
-            wxyz = await app.get_profile_photos(user_id)
-            wxy = await app.download_media(wxyz[0]['file_id'], file_name=f'{user_id}.jpg')
+            profile_photos = await app.get_profile_photos(user_id)
+            wxy = await app.download_media(profile_photos[0]['file_id'], file_name=f'{user_id}.jpg')
         except:
             hehe = await app.get_profile_photos(app.id)
             wxy = await app.download_media(hehe[0]['file_id'], file_name=f'{app.id}.jpg')
+
         xy = Image.open(wxy)
         a = Image.new('L', [640, 640], 0)
         b = ImageDraw.Draw(a)
-        b.pieslice([(0, 0), (640,640)], 0, 360, fill = 255, outline = "white")
+        b.pieslice([(0, 0), (640, 640)], 0, 360, fill=255, outline="white")
         c = np.array(xy)
         d = np.array(a)
         e = np.dstack((c, d))
@@ -222,14 +195,14 @@ async def gen_qthumb(videoid, user_id):
         x = f.resize((107, 107))
 
         youtube = Image.open(f"cache/thumb{videoid}.png")
-        bg = Image.open(f"AnonXMusic/assets/anonx.png")
-        image1 = changeImageSize(1280, 720, youtube)
+        bg = Image.open("AnonXMusic/assets/anonx.png")
+        image1 = await change_image_size(1280, 720, youtube)
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(30))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.6)
 
-        image3 = changeImageSize(1280, 720, bg)
+        image3 = await change_image_size(1280, 720, bg)
         image5 = image3.convert("RGBA")
         Image.alpha_composite(background, image5).save(f"cache/temp{videoid}.png")
 
