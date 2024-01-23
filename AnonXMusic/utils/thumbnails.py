@@ -1,6 +1,5 @@
 import os
 import re
-import numpy as np
 import aiofiles
 import aiohttp
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
@@ -10,7 +9,6 @@ from youtubesearchpython.__future__ import VideosSearch
 from AnonXMusic import app
 from config import YOUTUBE_IMG_URL
 
-
 def changeImageSize(maxWidth, maxHeight, image):
     widthRatio = maxWidth / image.size[0]
     heightRatio = maxHeight / image.size[1]
@@ -19,7 +17,6 @@ def changeImageSize(maxWidth, maxHeight, image):
     newImage = image.resize((newWidth, newHeight))
     return newImage
 
-
 def clear(text):
     list = text.split(" ")
     title = ""
@@ -27,7 +24,6 @@ def clear(text):
         if len(title) + len(i) < 60:
             title += " " + i
     return title.strip()
-
 
 async def get_thumb(videoid, user_id):
     if os.path.isfile(f"cache/{videoid}.png"):
@@ -71,15 +67,8 @@ async def get_thumb(videoid, user_id):
             hehe = await app.get_profile_photos(app.id)
             wxy = await app.download_media(hehe[0]['file_id'], file_name=f'{app.id}.jpg')
 
-        xy = Image.open(wxy)
-        a = Image.new('L', [740, 740], 0)
-        b = ImageDraw.Draw(a)
-        b.pieslice([(0, 0), (740,740)], 0, 360, fill = 255, outline = "white")
-        c = np.array(xy)
-        d = np.array(a)
-        e = np.dstack((c, d))
-        f = Image.fromarray(e)
-        x = f.resize((107, 107))
+        user_pic = Image.open(wxy)
+        user_pic_resized = user_pic.resize((100, 100))  # Adjust size as needed
 
         youtube = Image.open(f"cache/thumb{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
@@ -87,11 +76,14 @@ async def get_thumb(videoid, user_id):
         background = image2.filter(filter=ImageFilter.BoxBlur(10))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.5)
-        background.paste(x, (710, 427), mask=x)
         draw = ImageDraw.Draw(background)
+
+        # Positioning user profile picture on the left side
+        background.paste(user_pic_resized, (10, 10), mask=user_pic_resized)
+
         arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
-        draw.text((1110, 15), unidecode(app.name), fill="white", font=arial)
+        draw.text((1110, 8), unidecode(app.name), fill="white", font=arial)
         draw.text(
             (55, 560),
             f"{channel} | {views[:23]}",
@@ -135,5 +127,6 @@ async def get_thumb(videoid, user_id):
         background.save(f"cache/{videoid}.png")
         return f"cache/{videoid}.png"
     except Exception as e:
-        LOGGER("AnonXMusic").error(f"Error generating thumbnail: {e}")
+        print(e)
         return YOUTUBE_IMG_URL
+        
