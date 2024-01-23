@@ -94,6 +94,7 @@ async def skip(cli, message: Message, _, chat_id):
     user = check[0]["by"]
     streamtype = check[0]["streamtype"]
     videoid = check[0]["vidid"]
+    user_id = check[0]["user_id"]
     status = True if str(streamtype) == "video" else None
     db[chat_id][0]["played"] = 0
     exis = (check[0]).get("old_dur")
