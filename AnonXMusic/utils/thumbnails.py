@@ -66,7 +66,7 @@ async def get_thumb(videoid, user_id):
             user_pic_path = f"cache/user_{user_id}.jpg"
             await app.download_media(user_profile_pic[0]['file_id'], file_name=user_pic_path)
         except:
-            user_pic_path = ""  # Provide a default profile picture path if unable to get user's profile pic
+            user_pic_path = "AnonXMusic/utils/apppic.jpg"  # Provide a default profile picture path if unable to get user's profile pic
 
         user_pic = Image.open(user_pic_path)
         x = user_pic.resize((107, 107))
