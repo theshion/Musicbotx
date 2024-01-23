@@ -1,5 +1,6 @@
 import os
 import re
+
 import aiofiles
 import aiohttp
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
@@ -61,14 +62,14 @@ async def get_thumb(videoid, user_id):
                     await f.close()
 
         try:
-            wxyz = await app.get_profile_photos(user_id)
-            wxy = await app.download_media(wxyz[0]['file_id'], file_name=f'{user_id}.jpg')
+            user_profile_pic = await app.get_profile_photos(user_id)
+            user_pic_path = f"cache/user_{user_id}.jpg"
+            await app.download_media(user_profile_pic[0]['file_id'], file_name=user_pic_path)
         except:
-            hehe = await app.get_profile_photos(app.id)
-            wxy = await app.download_media(hehe[0]['file_id'], file_name=f'{app.id}.jpg')
+            user_pic_path = ""  # Provide a default profile picture path if unable to get user's profile pic
 
-        user_pic = Image.open(wxy)
-        user_pic_resized = user_pic.resize((100, 100))  # Adjust size as needed
+        user_pic = Image.open(user_pic_path)
+        x = user_pic.resize((107, 107))
 
         youtube = Image.open(f"cache/thumb{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
@@ -76,11 +77,8 @@ async def get_thumb(videoid, user_id):
         background = image2.filter(filter=ImageFilter.BoxBlur(10))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.5)
+        background.paste(x, (10, 10), mask=x)  # Adjust the position as needed
         draw = ImageDraw.Draw(background)
-
-        # Positioning user profile picture on the left side
-        background.paste(user_pic_resized, (10, 10), mask=user_pic_resized)
-
         arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
         draw.text((1110, 8), unidecode(app.name), fill="white", font=arial)
@@ -127,6 +125,5 @@ async def get_thumb(videoid, user_id):
         background.save(f"cache/{videoid}.png")
         return f"cache/{videoid}.png"
     except Exception as e:
-        print(e)
+        print(f"Error generating thumbnail: {e}")
         return YOUTUBE_IMG_URL
-        
