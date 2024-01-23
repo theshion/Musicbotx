@@ -71,6 +71,16 @@ async def get_thumb(videoid, user_id):
             hehe = await app.get_profile_photos(app.id)
             wxy = await app.download_media(hehe[0]['file_id'], file_name=f'{app.id}.jpg')
 
+        xy = Image.open(wxy)
+        a = Image.new('L', [740, 740], 0)
+        b = ImageDraw.Draw(a)
+        b.pieslice([(0, 0), (740,740)], 0, 360, fill = 255, outline = "white")
+        c = np.array(xy)
+        d = np.array(a)
+        e = np.dstack((c, d))
+        f = Image.fromarray(e)
+        x = f.resize((107, 107))
+
         youtube = Image.open(f"cache/thumb{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
