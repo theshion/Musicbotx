@@ -61,14 +61,19 @@ async def get_thumb(videoid, user_id):
                     await f.write(await resp.read())
                     await f.close()
 
-        try:
-            user_profile_pic = await app.get_profile_photos(user_id)
-            user_pic_path = f"cache/user_{user_id}.jpg"
-            await app.download_media(user_profile_pic[0]['file_id'], file_name=user_pic_path)
-        except:
-            user_pic_path = "AnonXMusic/utils/apppic.jpg"  # Provide a default profile picture path if unable to get user's profile pic
 
-        user_pic = Image.open(user_pic_path)
+        try:
+            wxy = await app.download_media(
+                (await app.get_users(user_id)).photo.big_file_id,
+                file_name=f"{user_id}.jpg",
+            )
+        except:
+            wxy = await app.download_media(
+                (await app.get_users(app.id)).photo.big_file_id,
+                file_name=f"{appi}.jpg",
+            )
+        
+        user_pic = Image.open(wxy)
         x = user_pic.resize((107, 107))
 
         youtube = Image.open(f"cache/thumb{videoid}.png")
