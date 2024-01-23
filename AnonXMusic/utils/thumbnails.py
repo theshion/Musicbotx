@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 from unidecode import unidecode
 from youtubesearchpython.__future__ import VideosSearch
 
-from AnonXMusic import app
+from AnonXMusic import LOGGER, app
 from config import YOUTUBE_IMG_URL
 
 def changeImageSize(maxWidth, maxHeight, image):
@@ -125,5 +125,5 @@ async def get_thumb(videoid, user_id):
         background.save(f"cache/{videoid}.png")
         return f"cache/{videoid}.png"
     except Exception as e:
-        print(f"Error generating thumbnail: {e}")
+        LOGGER("AnonXMusic").info(f"Error generating thumbnail: {e}")
         return YOUTUBE_IMG_URL
