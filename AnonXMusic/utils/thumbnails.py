@@ -40,7 +40,7 @@ def changeImageSize(maxWidth, maxHeight, image):
     return newImage
 
 
-async def get_thumb(videoid):
+async def get_thumb(videoid, user_id):
     if os.path.isfile(f"cache/{videoid}.png"):
         return f"cache/{videoid}.png"
 
