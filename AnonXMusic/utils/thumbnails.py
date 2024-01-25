@@ -89,14 +89,14 @@ async def get_thumb(videoid,user_id):
         background = image2.filter(filter=ImageFilter.BoxBlur(10))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.5)
-        y=changeImageSize(200,200,circle(youtube)) 
-        background.paste(y,(45,225),mask=y)
-        a=changeImageSize(200,200,circle(xp)) 
-        background.paste(a,(1045,225),mask=a)
+        y=changeImageSize(275,275,circle(youtube)) 
+        background.paste(y,(50,225),mask=y)
+        a=changeImageSize(275,275,circle(xp)) 
+        background.paste(a,(1040,225),mask=a)
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
-        draw.text((1110, 8), unidecode(app.name), fill="white", font=arial)
+        draw.text((1110, 15), unidecode(app.name), fill="white", font=arial)
         draw.text(
                 (55, 560),
                 f"{channel} | {views[:23]}",
