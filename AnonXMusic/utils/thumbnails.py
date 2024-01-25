@@ -40,7 +40,7 @@ def clear(text):
     return title.strip()
 
 
-async def get_thumb(videoid,user_id):
+async def get_thumb(videoid, user_id):
     if os.path.isfile(f"cache/{videoid}_{user_id}.png"):
         return f"cache/{videoid}_{user_id}.png"
 
@@ -89,10 +89,10 @@ async def get_thumb(videoid,user_id):
         background = image2.filter(filter=ImageFilter.BoxBlur(10))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.5)
-        y=changeImageSize(275,275,circle(youtube)) 
-        background.paste(y,(40,225),mask=y)
-        a=changeImageSize(275,275,circle(xp)) 
-        background.paste(a,(985,225),mask=a)
+        y=changeImageSize(300,300,circle(youtube)) 
+        background.paste(y,(850,225),mask=y)
+        a=changeImageSize(75,75,circle(xp)) 
+        background.paste(a,(970,275),mask=a)
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
