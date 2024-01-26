@@ -90,7 +90,7 @@ async def get_thumb(videoid, user_id):
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.5)
         y=changeImageSize(375,375,circle(youtube)) 
-        background.paste(y,(890,120),mask=y)
+        background.paste(y,(800,120),mask=y)
         a=changeImageSize(150,150,circle(xp)) 
         background.paste(a,(1020,400),mask=a)
         draw = ImageDraw.Draw(background)
