@@ -40,7 +40,7 @@ def clear(text):
     return title.strip()
 
 
-async def get_thumb(videoid, user_id):
+async def get_thumb(videoid, user_id, chat_id):
     if os.path.isfile(f"cache/{videoid}_{user_id}.png"):
         return f"cache/{videoid}_{user_id}.png"
 
@@ -82,13 +82,22 @@ async def get_thumb(videoid, user_id):
                 sp=await app.download_media(photo.file_id, file_name=f'{app.id}.jpg')
         xp=Image.open(sp)
 
+        try:
+            async for photo in app.get_chat_photos(chat_id,1):
+                gp=await app.download_media(photo.file_id, file_name=f'{user_id}.jpg')
+        except:
+            gp = "AnonXMusic/utils/apppic.jpg"  # Provide a default group picture path if unable to get group's photo
+
+        gpic=Image.open(gp)
+        
+
         youtube = Image.open(f"cache/thumb{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(10))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.5)
-        y=changeImageSize(375,375,circle(youtube)) 
+        y=changeImageSize(375,375,circle(gpic)) 
         background.paste(y,(775,100),mask=y)
         a=changeImageSize(150,150,circle(xp)) 
         background.paste(a,(1050,375),mask=a)
