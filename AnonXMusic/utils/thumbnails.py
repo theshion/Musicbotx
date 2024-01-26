@@ -95,11 +95,12 @@ async def get_thumb(videoid, user_id):
         background.paste(a,(1050,375),mask=a)
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
-        font = ImageFont.truetype("AnonXMusic/assets/default.ttf", 30)
-        draw.text((1090, 10), unidecode(app.name), fill="white", font=arial)
+        dur = ImageFont.truetype("AnonXMusic/assets/title.ttf", 30)
+        font = ImageFont.truetype("AnonXMusic/assets/default.ttf", 35)
+        draw.text((1000, 10), unidecode(app.name), fill="white", font=arial)
         draw.text(
                 (55, 560),
-                f"{channel} ⥮ {views[:23]}",
+                f"{channel} - {views[:23]}",
                 (255, 255, 255),
                 font=arial,
             )
@@ -125,13 +126,13 @@ async def get_thumb(videoid, user_id):
                 (36, 685),
                 "00:00",
                 (255, 255, 255),
-                font=arial,
+                font=dur,
             )
         draw.text(
                 (1185, 685),
                 f"{duration[:23]}",
                 (255, 255, 255),
-                font=arial,
+                font=dur,
             )
         try:
             os.remove(f"cache/thumb{videoid}.png")
