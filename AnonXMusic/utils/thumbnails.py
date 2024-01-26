@@ -107,8 +107,7 @@ async def get_thumb(videoid, user_id, chat_id):
 
         image3 = changeImageSize(1280, 720, bg)
         image5 = image3.convert("RGBA")
-        Image.alpha_composite(background, image5).save(f"cache/temp{videoid}.png")
-
+        
         background.paste(group_pic_resized, (775, 100), mask=group_pic_resized)
         background.paste(user_pic_resized, (1050, 375), mask=user_pic_resized)
         background.paste(image3, (0, 0), mask=image3)
