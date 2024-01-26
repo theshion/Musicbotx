@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 from unidecode import unidecode
 from youtubesearchpython.__future__ import VideosSearch
 
-from AnonXMusic import app
+from AnonXMusic import app, LOGGER
 from config import YOUTUBE_IMG_URL
 
 
@@ -143,4 +143,5 @@ async def get_thumb(videoid, user_id):
         background.save(f"cache/{videoid}_{user_id}.png")
         return f"cache/{videoid}_{user_id}.png"
     except Exception:
+        LOGGER("AnonXMusic").error(f"error")
         return YOUTUBE_IMG_URL
