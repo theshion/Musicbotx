@@ -94,8 +94,8 @@ async def get_thumb(videoid, user_id):
         a=changeImageSize(150,150,circle(xp)) 
         background.paste(a,(1050,375),mask=a)
         draw = ImageDraw.Draw(background)
-        arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 35)
-        font = ImageFont.truetype("AnonXMusic/assets/assfont.ttf", 30)
+        arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 25)
+        font = ImageFont.truetype("AnonXMusic/assets/title.ttf", 30)
         draw.text((1105, 10), unidecode(app.name), fill="white", font=arial)
         draw.text(
                 (55, 560),
