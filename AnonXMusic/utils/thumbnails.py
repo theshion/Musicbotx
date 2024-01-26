@@ -78,7 +78,7 @@ async def get_thumb(videoid, user_id, chat_id):
             user_pic_path = f"cache/user_{user_id}.jpg"
             await app.download_media(user_profile_pic.photo.big_file_id, file_name=user_pic_path)
         except:
-            user_pic_path = "AnonXMusic/utils/apppic.jpg"  # Provide a default profile picture path if unable to get user's profile pic
+            user_pic_path = "AnonXMusic/utils/user.jpg"  # Provide a default profile picture path if unable to get user's profile pic
 
         user_pic = Image.open(user_pic_path)
         user_pic_resized = changeImageSize(150, 150, circle(user_pic))
@@ -89,7 +89,10 @@ async def get_thumb(videoid, user_id, chat_id):
             group_pic_path = f"cache/group_{chat_id}.jpg"
             await app.download_media(group_photo.photo.big_file_id, file_name=group_pic_path)
         except:
-            group_pic_path = "AnonXMusic/utils/apppic.jpg"  # Provide a default group picture path if unable to get group's photo
+            group_photo = await app.get_chat(app.id)
+            group_pic_path = f"cache/group_{app.id}.jpg"
+            await app.download_media(group_photo.photo.big_file_id, file_name=group_pic_path)
+          # Provide a default group picture path if unable to get group's photo
 
         group_pic = Image.open(group_pic_path)
         group_pic_resized = changeImageSize(375, 375, circle(group_pic))
@@ -108,7 +111,7 @@ async def get_thumb(videoid, user_id, chat_id):
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
         dur = ImageFont.truetype("AnonXMusic/assets/title.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/robot.otf", 35)
-        draw.text((1035, 10), unidecode(app.name), fill="white", font=arial)
+        draw.text((1040, 10), unidecode(app.name), fill="white", font=arial)
         draw.text(
             (55, 560),
             f"{channel} - {views[:23]}",
