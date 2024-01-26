@@ -11,7 +11,6 @@ from youtubesearchpython.__future__ import VideosSearch
 from AnonXMusic import app, LOGGER
 from config import YOUTUBE_IMG_URL
 
-
 def changeImageSize(maxWidth, maxHeight, image):
     widthRatio = maxWidth / image.size[0]
     heightRatio = maxHeight / image.size[1]
@@ -24,21 +23,19 @@ def circle(img):
      h,w=img.size 
      a = Image.new('L', [h,w], 0) 
      b = ImageDraw.Draw(a) 
-     b.pieslice([(0, 0), (h,w)], 0, 360, fill = 255,outline = "white") 
+     b.pieslice([(0, 0), (h,w)], 0, 360, fill = 255, outline = "white") 
      c = np.array(img) 
      d = np.array(a) 
      e = np.dstack((c, d)) 
      return Image.fromarray(e)
 
-
 def clear(text):
-    list = text.split(" ")
+    lst = text.split(" ")
     title = ""
-    for i in list:
+    for i in lst:
         if len(title) + len(i) < 60:
             title += " " + i
     return title.strip()
-
 
 async def get_thumb(videoid, user_id, chat_id):
     if os.path.isfile(f"cache/{videoid}_{user_id}.png"):
@@ -74,80 +71,86 @@ async def get_thumb(videoid, user_id, chat_id):
                     f = await aiofiles.open(f"cache/thumb{videoid}.png", mode="wb")
                     await f.write(await resp.read())
                     await f.close()
-        try:
-            async for photo in app.get_chat_photos(user_id,1):
-                sp=await app.download_media(photo.file_id, file_name=f'{user_id}.jpg')
-        except:
-            async for photo in app.get_chat_photos(app.id,1):
-                sp=await app.download_media(photo.file_id, file_name=f'{app.id}.jpg')
-        xp=Image.open(sp)
-
-        try:
-            async for photo in app.get_chat_photos(chat_id,1):
-                gp=await app.download_media(photo.file_id, file_name=f'{chat_id}.jpg')
-        except:
-            gp = "AnonXMusic/utils/apppic.jpg"  # Provide a default group picture path if unable to get group's photo
-
-        gpic=Image.open(gp)
         
+        # Download user's profile picture
+        try:
+            user_profile_pic = await app.get_chat(user_id)
+            user_pic_path = f"cache/user_{user_id}.jpg"
+            await app.download_media(user_profile_pic.photo.big_file_id, file_name=user_pic_path)
+        except:
+            user_pic_path = "AnonXMusic/utils/apppic.jpg"  # Provide a default profile picture path if unable to get user's profile pic
 
+        user_pic = Image.open(user_pic_path)
+        user_pic_resized = changeImageSize(150, 150, circle(user_pic))
+
+        # Download group photo
+        try:
+            group_photo = await app.get_chat(chat_id)
+            group_pic_path = f"cache/group_{chat_id}.jpg"
+            await app.download_media(group_photo.photo.big_file_id, file_name=group_pic_path)
+        except:
+            group_pic_path = "AnonXMusic/utils/apppic.jpg"  # Provide a default group picture path if unable to get group's photo
+
+        group_pic = Image.open(group_pic_path)
+        group_pic_resized = changeImageSize(375, 375, circle(group_pic))
+        
         youtube = Image.open(f"cache/thumb{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(10))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.5)
-        y=changeImageSize(375,375,circle(gpic)) 
-        background.paste(y,(775,100),mask=y)
-        a=changeImageSize(150,150,circle(xp)) 
-        background.paste(a,(1050,375),mask=a)
+        
+        background.paste(group_pic_resized, (775, 100), mask=group_pic_resized)
+        background.paste(user_pic_resized, (1050, 375), mask=user_pic_resized)
+        
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
         dur = ImageFont.truetype("AnonXMusic/assets/title.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/robot.otf", 35)
         draw.text((1035, 10), unidecode(app.name), fill="white", font=arial)
         draw.text(
-                (55, 560),
-                f"{channel} - {views[:23]}",
-                (255, 255, 255),
-                font=arial,
-            )
+            (55, 560),
+            f"{channel} - {views[:23]}",
+            (255, 255, 255),
+            font=arial,
+        )
         draw.text(
-                (57, 600),
-                clear(title),
-                (255, 255, 255),
-                font=font,
-            )
+            (57, 600),
+            clear(title),
+            (255, 255, 255),
+            font=font,
+        )
         draw.line(
-                [(55, 660), (1220, 660)],
-                fill="white",
-                width=5,
-                joint="curve",
-            )
+            [(55, 660), (1220, 660)],
+            fill="white",
+            width=5,
+            joint="curve",
+        )
         draw.ellipse(
-                [(918, 648), (942, 672)],
-                outline="white",
-                fill="white",
-                width=15,
-            )
+            [(918, 648), (942, 672)],
+            outline="white",
+            fill="white",
+            width=15,
+        )
         draw.text(
-                (36, 685),
-                "00:00",
-                (255, 255, 255),
-                font=dur,
-            )
+            (36, 685),
+            "00:00",
+            (255, 255, 255),
+            font=dur,
+        )
         draw.text(
-                (1185, 685),
-                f"{duration[:23]}",
-                (255, 255, 255),
-                font=dur,
-            )
+            (1185, 685),
+            f"{duration[:23]}",
+            (255, 255, 255),
+            font=dur,
+        )
         try:
             os.remove(f"cache/thumb{videoid}.png")
         except:
             pass
         background.save(f"cache/{videoid}_{user_id}.png")
         return f"cache/{videoid}_{user_id}.png"
-    except Exception:
-        LOGGER("AnonXMusic").error(f"error")
+    except Exception as e:
+        LOGGER("AnonXMusic").error(f"Error generating thumbnail: {e}")
         return YOUTUBE_IMG_URL
