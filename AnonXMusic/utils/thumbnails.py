@@ -84,21 +84,18 @@ async def get_thumb(videoid, user_id):
         xp=Image.open(sp)
 
         youtube = Image.open(f"cache/thumb{videoid}.png")
-        bg = Image.open(f"AnonXMusic/assets/picbg.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(10))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.5)
-        image3 = changeImageSize(1280, 720, bg)
-        background.paste(image3, (0, 0), mask=image3)
         y=changeImageSize(375,375,circle(youtube)) 
         background.paste(y,(775,100),mask=y)
         a=changeImageSize(150,150,circle(xp)) 
         background.paste(a,(1050,375),mask=a)
         draw = ImageDraw.Draw(background)
-        arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
-        font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
+        arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 35)
+        font = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
         draw.text((1105, 10), unidecode(app.name), fill="white", font=arial)
         draw.text(
                 (55, 560),
