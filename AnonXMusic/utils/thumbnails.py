@@ -84,7 +84,7 @@ async def get_thumb(videoid, user_id, chat_id):
 
         try:
             async for photo in app.get_chat_photos(chat_id,1):
-                gp=await app.download_media(photo.file_id, file_name=f'{user_id}.jpg')
+                gp=await app.download_media(photo.file_id, file_name=f'{chat_id}.jpg')
         except:
             gp = "AnonXMusic/utils/apppic.jpg"  # Provide a default group picture path if unable to get group's photo
 
