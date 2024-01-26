@@ -90,7 +90,7 @@ async def get_thumb(videoid, user_id, chat_id):
             await app.download_media(group_photo.photo.big_file_id, file_name=group_pic_path)
         except:
             group_photo = await app.get_chat(app.id)
-            group_pic_path = f"cache/group_{app.id}.jpg"
+            group_pic_path = f"cache/group_{app_id}.jpg"
             await app.download_media(group_photo.photo.big_file_id, file_name=group_pic_path)
           # Provide a default group picture path if unable to get group's photo
 
