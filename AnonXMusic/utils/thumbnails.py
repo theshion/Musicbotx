@@ -103,7 +103,7 @@ async def get_thumb(videoid, user_id, chat_id):
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(12))
         enhancer = ImageEnhance.Brightness(background)
-        background = enhancer.enhance(0.8)
+        background = enhancer.enhance(0.7)
 
         image3 = changeImageSize(1280, 720, bg)
         image5 = image3.convert("RGBA")
@@ -117,8 +117,7 @@ async def get_thumb(videoid, user_id, chat_id):
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
         dur = ImageFont.truetype("AnonXMusic/assets/title.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/title.ttf", 37)
-        app = ImageFont.truetype("AnonXMusic/assets/assfont.ttf", 30) 
-        draw.text((1037, 10), unidecode(app.name), fill="white", font=app)
+        draw.text((1037, 10), unidecode(app.name), fill="white", font=font)
         draw.text(
             (50, 642),
             f"{channel} - {views[:23]}",
