@@ -43,6 +43,9 @@ def exp_panel(_):
             InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_CHAT),   
             InlineKeyboardButton(text=_["S_B_69"], url=config.SUPPORT_CHANNEL),
         ],
+        [
+            InlineKeyboardButton(text=_["S_B_143"], callback_data=f"call_sys"),
+        ],
         [ 
             InlineKeyboardButton(text=_["BACK_BUTTON"], callback_data=f"settingsback_helper"),
         ],
