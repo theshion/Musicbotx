@@ -216,8 +216,6 @@ async def noah_private(
 @app.on_callback_query(filters.regex("call_sys") & ~BANNED_USERS)
 @languageCB
 async def sys_cb(client, CallbackQuery, _):
-    callback_data = CallbackQuery.data.strip()
-    cb = callback_data.split(None, 1)[1]
     start = datetime.now()
     pytgping = await Anony.ping()
     UP, CPU, RAM, DISK = await bot_sys_stats()
