@@ -106,7 +106,7 @@ async def get_thumb(videoid, user_id, chat_id):
         background = enhancer.enhance(0.9)
 
         image3 = changeImageSize(1280, 720, bg)
-        image5 = image3.convert("RGBA")
+        image5 = image3.resize((1280, 720), Image.ANTIALIAS).convert("RGBA")
 
         background.paste(group_pic_resized, (47, 154), mask=group_pic_resized)
         background.paste(image5, (0, 0), mask=image5)
