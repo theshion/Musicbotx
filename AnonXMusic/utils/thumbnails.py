@@ -81,7 +81,7 @@ async def get_thumb(videoid, user_id, chat_id):
             user_pic_path = "AnonXMusic/utils/unknown.jpg"  # Provide a default profile picture path if unable to get user's profile pic
 
         user_pic = Image.open(user_pic_path)
-        user_pic_resized = changeImageSize(188, 188, circle(user_pic))
+        user_pic_resized = changeImageSize(190, 190, circle(user_pic))
 
         # Download group photo
         try:
@@ -95,7 +95,7 @@ async def get_thumb(videoid, user_id, chat_id):
           # Provide a default group picture path if unable to get group's photo
 
         group_pic = Image.open(group_pic_path)
-        group_pic_resized = changeImageSize(350, 350, circle(group_pic))
+        group_pic_resized = changeImageSize(352, 352, circle(group_pic))
         
         youtube = Image.open(f"cache/thumb{videoid}.png")
         bg = Image.open("AnonXMusic/assets/gcpfp.png")
@@ -103,21 +103,22 @@ async def get_thumb(videoid, user_id, chat_id):
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(12))
         enhancer = ImageEnhance.Brightness(background)
-        background = enhancer.enhance(0.7)
+        background = enhancer.enhance(0.8)
 
         image3 = changeImageSize(1280, 720, bg)
         image5 = image3.convert("RGBA")
-        image5 = image5.filter(ImageFilter.GaussianBlur(radius=0.3))  # Apply Gaussian Blur for enhancement
+        image5 = image5.filter(ImageFilter.GaussianBlur(radius=0.2))  # Apply Gaussian Blur for enhancement
         
         background.paste(group_pic_resized, (47, 154), mask=group_pic_resized)
         background.paste(image5, (0, 0), mask=image5)
-        background.paste(user_pic_resized, (292, 403), mask=user_pic_resized)
+        background.paste(user_pic_resized, (290, 403), mask=user_pic_resized)
         
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
         dur = ImageFont.truetype("AnonXMusic/assets/title.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/title.ttf", 37)
-        draw.text((1037, 10), unidecode(app.name), fill="white", font=arial)
+        app = ImageFont.truetype("AnonXMusic/assets/assfont.ttf", 30) 
+        draw.text((1037, 10), unidecode(app.name), fill="white", font=app)
         draw.text(
             (50, 642),
             f"{channel} - {views[:23]}",
