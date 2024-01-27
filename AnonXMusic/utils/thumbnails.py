@@ -81,7 +81,7 @@ async def get_thumb(videoid, user_id, chat_id):
             user_pic_path = "AnonXMusic/utils/unknown.jpg"  # Provide a default profile picture path if unable to get user's profile pic
 
         user_pic = Image.open(user_pic_path)
-        user_pic_resized = changeImageSize(150, 150, circle(user_pic))
+        user_pic_resized = changeImageSize(175, 175, circle(user_pic))
 
         # Download group photo
         try:
@@ -95,7 +95,7 @@ async def get_thumb(videoid, user_id, chat_id):
           # Provide a default group picture path if unable to get group's photo
 
         group_pic = Image.open(group_pic_path)
-        group_pic_resized = changeImageSize(375, 375, circle(group_pic))
+        group_pic_resized = changeImageSize(350, 350, circle(group_pic))
         
         youtube = Image.open(f"cache/thumb{videoid}.png")
         bg = Image.open("AnonXMusic/assets/gcpfp.png")
@@ -108,35 +108,35 @@ async def get_thumb(videoid, user_id, chat_id):
         image3 = changeImageSize(1280, 720, bg)
         image5 = image3.convert("RGBA")
 
-        background.paste(group_pic_resized, (75, 125), mask=group_pic_resized)
+        background.paste(group_pic_resized, (90, 120), mask=group_pic_resized)
         background.paste(image5, (0, 0), mask=image5)
-        background.paste(user_pic_resized, (275, 430), mask=user_pic_resized)
+        background.paste(user_pic_resized, (250, 400), mask=user_pic_resized)
         
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
         dur = ImageFont.truetype("AnonXMusic/assets/title.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/title.ttf", 35)
-        draw.text((1042, 10), unidecode(app.name), fill="white", font=arial)
+        draw.text((1040, 10), unidecode(app.name), fill="white", font=arial)
         draw.text(
-            (55, 625),
+            (52, 640),
             f"{channel} - {views[:23]}",
             (255, 255, 255),
             font=arial,
         )
         draw.text(
-            (57, 665),
+            (52, 680),
             clear(title),
             (255, 255, 255),
             font=font,
         )
         draw.text(
-            (380, 380),
+            (430, 370),
             "00:00",
             (255, 255, 255),
             font=dur,
         )
         draw.text(
-            (1125, 380),
+            (1130, 370),
             f"{duration[:23]}",
             (255, 255, 255),
             font=dur,
