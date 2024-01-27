@@ -108,9 +108,9 @@ async def get_thumb(videoid, user_id, chat_id):
         image3 = changeImageSize(1280, 720, bg)
         image5 = image3.convert("RGBA")
 
-        background.paste(group_pic_resized, (75, 150), mask=group_pic_resized)
+        background.paste(group_pic_resized, (50, 150), mask=group_pic_resized)
         background.paste(image5, (0, 0), mask=image5)
-        background.paste(user_pic_resized, (260, 415), mask=user_pic_resized)
+        background.paste(user_pic_resized, (290, 410), mask=user_pic_resized)
         
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
@@ -130,13 +130,13 @@ async def get_thumb(videoid, user_id, chat_id):
             font=font,
         )
         draw.text(
-            (530, 400),
+            (535, 400),
             "00:00",
             (255, 255, 255),
             font=dur,
         )
         draw.text(
-            (1150, 400),
+            (1155, 400),
             f"{duration[:23]}",
             (255, 255, 255),
             font=dur,
