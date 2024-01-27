@@ -1,9 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from AnonXMusic.core.call import Anony
-from AnonXMusic import Spotify, app
-from spotipy.oauth2 import SpotifyOAuth
-
+from AnonXMusic import Spotify, app, LOGGER
 
 SPOTIFY_PLAYLISTS = {
     'English': 'hCVorPfNT8Ci_Uhzicx8qA',
@@ -13,49 +11,37 @@ SPOTIFY_PLAYLISTS = {
 
 
 @app.on_message(filters.command("aiplay"))
-def aiplay(_, msg):
+def aiplayl(_, msg):
     try:
         chat_id = msg.chat.id
-        user_id = msg.from_user.id
 
-        # Create buttons for different playlists
         buttons = [
-            [
-                InlineKeyboardButton("English", callback_data='English'),
-            ],
-            [
-                InlineKeyboardButton("Hindi", callback_data='Hindi'),
-            ],
-            [
-                InlineKeyboardButton("Other Languages", callback_data='OtherLanguages')
-            ]
+            [InlineKeyboardButton(name, callback_data=name) for name in SPOTIFY_PLAYLISTS.keys()]
         ]
-
-        # Send the buttons to the user
-        msg.reply_text("ᴄʜᴏᴏꜱᴇ ꜰʀᴏᴍ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴꜱ", reply_markup=InlineKeyboardMarkup(buttons))
+        msg.reply_text("Choose from the buttons below:", reply_markup=InlineKeyboardMarkup(buttons))
 
     except Exception as e:
-        print(f"Error: {e}")
+        LOGGER("AnonXMusic").error(f"Error in aiplay command: {e}")
         msg.reply_text("An error occurred while processing your request.")
 
-@app.on_callback_query()
-def button_callback(_, callback_query):
+@app.on_callback_query(filters.regex("English|Hindi|OtherLanguages"))
+def butston_callback(_, callback_query):
     try:
         chat_id = callback_query.message.chat.id
         user_id = callback_query.from_user.id
         playlist_name = callback_query.data
 
-        # Get the playlist ID based on the user's choice
         playlist_id = SPOTIFY_PLAYLISTS.get(playlist_name)
 
-        # Get the first track from the selected Spotify playlist
+        if not playlist_id:
+            raise ValueError(f"Invalid playlist: {playlist_name}")
+
         playlist_tracks = Spotify.playlist_tracks(playlist_id)
         track_url = playlist_tracks['items'][0]['track']['external_urls']['Spotify']
 
-        # Start playing the track on the voice chat
         Anony.stream_call(chat_id, user_id, audio_file=track_url)
-        callback_query.message.reply_text(f"➲ <u>ᴀɪ-ᴘʟᴀʏᴇʀ ꜱᴛᴀʀᴛᴇᴅ</u>\n⬝ ɴᴏᴡ ᴘʟᴀʏɪɴɢ {playlist_name}\n⬝ ợᴜᴇʀʏ ʙʏ - {callback_query.from_user.mention}\n⬝ ꜱᴛʀᴇᴀᴍᴇᴅ ʙʏ - ɴᴏᴀʜ ᴍᴜꜱɪᴄ")
+        callback_query.message.reply_text(f"Ai-player started\nNow playing {playlist_name}\nQuery by {callback_query.from_user.mention}\nStreamed by Noah Music")
 
     except Exception as e:
-        print(f"Error: {e}")
+        LOGGER("AnonXMusic").error(f"Error in button callback: {e}")
         callback_query.message.reply_text("An error occurred while processing your request.")
