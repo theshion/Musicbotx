@@ -81,7 +81,7 @@ async def get_thumb(videoid, user_id, chat_id):
             user_pic_path = "AnonXMusic/utils/unknown.jpg"  # Provide a default profile picture path if unable to get user's profile pic
 
         user_pic = Image.open(user_pic_path)
-        user_pic_resized = changeImageSize(175, 175, circle(user_pic))
+        user_pic_resized = changeImageSize(180, 180, circle(user_pic))
 
         # Download group photo
         try:
@@ -101,16 +101,16 @@ async def get_thumb(videoid, user_id, chat_id):
         bg = Image.open("AnonXMusic/assets/gcpfp.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
-        background = image2.filter(filter=ImageFilter.BoxBlur(10))
+        background = image2.filter(filter=ImageFilter.BoxBlur(15))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.5)
 
         image3 = changeImageSize(1280, 720, bg)
         image5 = image3.convert("RGBA")
 
-        background.paste(group_pic_resized, (50, 150), mask=group_pic_resized)
+        background.paste(group_pic_resized, (47, 154), mask=group_pic_resized)
         background.paste(image5, (0, 0), mask=image5)
-        background.paste(user_pic_resized, (290, 410), mask=user_pic_resized)
+        background.paste(user_pic_resized, (305, 410), mask=user_pic_resized)
         
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
@@ -130,13 +130,13 @@ async def get_thumb(videoid, user_id, chat_id):
             font=font,
         )
         draw.text(
-            (535, 400),
+            (537, 400),
             "00:00",
             (255, 255, 255),
             font=dur,
         )
         draw.text(
-            (1155, 400),
+            (1158, 400),
             f"{duration[:23]}",
             (255, 255, 255),
             font=dur,
