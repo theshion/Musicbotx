@@ -37,7 +37,7 @@ def butston_callback(_, callback_query):
             raise ValueError(f"Invalid playlist: {playlist_name}")
 
         playlist_tracks = Spotify.playlist_tracks(playlist_id)
-        track_url = playlist_tracks['items'][0]['track']['external_urls']['Spotify']
+        track_url = playlist_tracks['items'][0]['track']['external_urls']
 
         Anony.stream_call(chat_id, user_id, audio_file=track_url)
         callback_query.message.reply_text(f"Ai-player started\nNow playing {playlist_name}\nQuery by {callback_query.from_user.mention}\nStreamed by Noah Music")
