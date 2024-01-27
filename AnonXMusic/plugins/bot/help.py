@@ -221,6 +221,6 @@ async def sys_cb(client, CallbackQuery, _):
     UP, CPU, RAM, DISK = await bot_sys_stats()
     resp = (datetime.now() - start).microseconds / 1000
     await CallbackQuery.answer(
-        _["ping_2"].format(resp, app.mention, UP, RAM, CPU, DISK, pytgping),
+        _["ping_6"].format(resp, app.mention, UP, RAM, CPU, DISK, pytgping),
         show_alert=True,
     )
