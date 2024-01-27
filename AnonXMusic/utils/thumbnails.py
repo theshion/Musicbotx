@@ -103,14 +103,14 @@ async def get_thumb(videoid, user_id, chat_id):
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(15))
         enhancer = ImageEnhance.Brightness(background)
-        background = enhancer.enhance(0.5)
+        background = enhancer.enhance(0.9)
 
         image3 = changeImageSize(1280, 720, bg)
         image5 = image3.convert("RGBA")
 
         background.paste(group_pic_resized, (47, 154), mask=group_pic_resized)
         background.paste(image5, (0, 0), mask=image5)
-        background.paste(user_pic_resized, (300, 406), mask=user_pic_resized)
+        background.paste(user_pic_resized, (295, 405), mask=user_pic_resized)
         
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
