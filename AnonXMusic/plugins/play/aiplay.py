@@ -45,7 +45,7 @@ async def button_callback(_, callback_query):
             raise ValueError(f"Invalid language: {selected_language}")
 
         # Start playing the song on the voice chat
-        Anony.join_group_call(chat_id, youtube_link, user_id=user_id)
+        Anony.stream_call(chat_id, youtube_link, user_id=user_id)
         await callback_query.message.reply_text(f"AI Player started - Now playing {selected_language} song")
 
     except Exception as e:
