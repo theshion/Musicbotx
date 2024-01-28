@@ -117,7 +117,7 @@ async def get_thumb(videoid, user_id, chat_id):
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
         dur = ImageFont.truetype("AnonXMusic/assets/title.ttf", 30)
         onfont = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
-        font = ImageFont.truetype("AnonXMusic/assets/Cloudb.otf", 35)
+        font = ImageFont.truetype("AnonXMusic/assets/Cloudb.otf", 38)
         draw.text((1037, 10), unidecode(app.name), fill="white", font=onfont)
         draw.text(
             (537, 350),
@@ -132,7 +132,7 @@ async def get_thumb(videoid, user_id, chat_id):
             font=arial,
         )
         draw.text(
-            (50, 682),
+            (50, 670),
             clear(title),
             (255, 255, 255),
             font=font,
