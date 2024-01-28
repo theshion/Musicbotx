@@ -31,11 +31,8 @@ async def aiplay(_, msg):
 
 # Handle button clicks
 @app.on_callback_query()
-async def button_callback(_, callback_query, user_id, chat_id):
+async def button_callback(_, callback_query):
     try:
-        chat_id = callback_query.message.chat.id
-        user_id = callback_query.from_user.id
-
         # Get the selected language
         selected_language = callback_query.data.lower()
 
@@ -46,9 +43,11 @@ async def button_callback(_, callback_query, user_id, chat_id):
             raise ValueError(f"Invalid language: {selected_language}")
 
         # Start playing the song on the voice chat
-        Anony.join_group_call(user_id, chat_id, youtube_link)
+        Anony.join_group_call(callback_query.from_user.id, callback_query.message.chat.id, youtube_link)
         await callback_query.message.reply_text(f"AI Player started - Now playing {selected_language} song")
 
     except Exception as e:
         LOGGER("AnonXMusic").error(f"Error in button callback: {e}")
         await callback_query.message.reply_text("An error occurred while processing your request.")
+
+
