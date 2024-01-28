@@ -50,4 +50,4 @@ async def button_callback(_, callback_query):
 
     except Exception as e:
         LOGGER("AnonXMusic").error(f"Error in button callback: {e}")
-        await callback_query.message.reply_text("An error occurred while processing your request."
+        await callback_query.message.reply_text("An error occurred while processing your request.")
