@@ -1,47 +1,54 @@
+import logging
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from AnonXMusic.core.call import Anony
-from AnonXMusic import Spotify, app, LOGGER
+from AnonXMusic import LOGGER, app
 
-SPOTIFY_PLAYLISTS = {
-    'English': 'hCVorPfNT8Ci_Uhzicx8qA',
-    'Hindi': 'pTIt8-UhQ7OebaiCt5wM7A',
-    'OtherLanguages': 'VhIgr9TXRIa9_FJGgGr99A'
+# Dictionary containing YouTube links for Hindi and English songs
+song_links = {
+    "Hindi": "",
+    "English": "",
 }
 
-
+# Handle /aiplay command
 @app.on_message(filters.command("aiplay"))
-def aiplayl(_, msg):
+async def aiplay(_, msg):
     try:
         chat_id = msg.chat.id
 
+        # Create buttons for Hindi and English
         buttons = [
-            [InlineKeyboardButton(name, callback_data=name) for name in SPOTIFY_PLAYLISTS.keys()]
+            [InlineKeyboardButton("Hindi", callback_data="hindi"),
+             InlineKeyboardButton("English", callback_data="english")]
         ]
-        msg.reply_text("Choose from the buttons below:", reply_markup=InlineKeyboardMarkup(buttons))
+
+        # Send the buttons to the user
+        await msg.reply_text("Choose language:", reply_markup=InlineKeyboardMarkup(buttons))
 
     except Exception as e:
         LOGGER("AnonXMusic").error(f"Error in aiplay command: {e}")
-        msg.reply_text("An error occurred while processing your request.")
+        await msg.reply_text("An error occurred while processing your request.")
 
-@app.on_callback_query(filters.regex("English|Hindi|OtherLanguages"))
-def butston_callback(_, callback_query):
+# Handle button clicks
+@app.on_callback_query()
+async def button_callback(_, callback_query):
     try:
         chat_id = callback_query.message.chat.id
         user_id = callback_query.from_user.id
-        playlist_name = callback_query.data
 
-        playlist_id = SPOTIFY_PLAYLISTS.get(playlist_name)
+        # Get the selected language
+        selected_language = callback_query.data.lower()
 
-        if not playlist_id:
-            raise ValueError(f"Invalid playlist: {playlist_name}")
+        # Get the YouTube link based on the selected language
+        youtube_link = song_links.get(selected_language)
 
-        playlist_tracks = Spotify.playlist_tracks(playlist_id)
-        track_url = playlist_tracks['items'][0]['track']['external_urls']
+        if not youtube_link:
+            raise ValueError(f"Invalid language: {selected_language}")
 
-        Anony.stream_call(chat_id, user_id, audio_file=track_url)
-        callback_query.message.reply_text(f"Ai-player started\nNow playing {playlist_name}\nQuery by {callback_query.from_user.mention}\nStreamed by Noah Music")
+        # Start playing the song on the voice chat
+        Anony.join_group_call(chat_id, youtube_link, user_id=user_id)
+        await callback_query.message.reply_text(f"AI Player started - Now playing {selected_language} song")
 
     except Exception as e:
         LOGGER("AnonXMusic").error(f"Error in button callback: {e}")
-        callback_query.message.reply_text("An error occurred while processing your request.")
+        await callback_query.message.reply_text("An error occurred while processing your request."
