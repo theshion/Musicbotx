@@ -5,8 +5,8 @@ from AnonXMusic import LOGGER, app
 
 # Dictionary containing YouTube links for Hindi and English songs
 song_links = {
-    "Hindi": "https://youtu.be/qgN1L95njA8?si=s07yIPpue3A4oEg9",
-    "English": "https://youtu.be/FUm67twFGmU?si=7cRrAGPfoxyYlJz6",
+    "hindi": "https://youtu.be/qgN1L95njA8?si=s07yIPpue3A4oEg9",
+    "english": "https://youtu.be/FUm67twFGmU?si=7cRrAGPfoxyYlJz6",
 }
 
 # Handle /aiplay command
