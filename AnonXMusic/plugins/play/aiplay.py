@@ -14,7 +14,8 @@ song_links = {
 async def aiplay(_, msg):
     try:
         chat_id = msg.chat.id
-
+        user_id = msg.from_user.id
+         
         # Create buttons for Hindi and English
         buttons = [
             [InlineKeyboardButton("Hindi", callback_data="hindi"),
@@ -30,7 +31,7 @@ async def aiplay(_, msg):
 
 # Handle button clicks
 @app.on_callback_query()
-async def button_callback(_, callback_query):
+async def button_callback(_, callback_query, user_id, chat_id):
     try:
         chat_id = callback_query.message.chat.id
         user_id = callback_query.from_user.id
@@ -45,7 +46,7 @@ async def button_callback(_, callback_query):
             raise ValueError(f"Invalid language: {selected_language}")
 
         # Start playing the song on the voice chat
-        Anony.stream_call(youtube_link)
+        Anony.join_group_call(user_id, chat_id, youtube_link)
         await callback_query.message.reply_text(f"AI Player started - Now playing {selected_language} song")
 
     except Exception as e:
