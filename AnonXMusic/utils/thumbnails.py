@@ -120,8 +120,14 @@ async def get_thumb(videoid, user_id, chat_id):
         font = ImageFont.truetype("AnonXMusic/assets/Cloudb.otf", 35)
         draw.text((1037, 10), unidecode(app.name), fill="white", font=onfont)
         draw.text(
-            (50, 642),
-            f"{channel} - {views[:23]}",
+            (537, 350),
+            f"Channel - {channel}",
+            (255, 255, 255),
+            font=arial,
+        )
+        draw.text(
+            (537, 375),
+            f"Views - {views[:23]}",
             (255, 255, 255),
             font=arial,
         )
