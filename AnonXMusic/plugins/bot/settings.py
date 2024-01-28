@@ -74,7 +74,7 @@ async def settings_cb(client, CallbackQuery, _):
 @languageCB
 async def source_helper(client, CallbackQuery, _):
     await CallbackQuery.edit_message_media(
-        InputMediaVideo("https://te.legra.ph/file/0a10ff4d3fe9d6cb52520.mp4", has_spoiler=True),
+        InputMediaVideo("https://telegra.ph/file/b468c776e37865e2faeb5.mp4", has_spoiler=True),
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton(text="🔙 ʙᴀᴄᴋ", callback_data=f"settingsback_helper")]]
         ),
