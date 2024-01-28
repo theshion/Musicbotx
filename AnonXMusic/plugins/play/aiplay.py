@@ -45,8 +45,15 @@ async def button_callback(_, callback_query):
         if not youtube_link:
             raise ValueError(f"Invalid language: {selected_language}")
 
+
+        stream = AudioVideoPiped(
+            youtube_link,
+            audio_parameters=HighQualityAudio(),
+            video_parameters=MediumQualityVideo(),
+        )
+        
         # Start playing the song on the voice chat
-        await Anony.join_group_call(youtube_link)
+        await Anony.join_group_call(chat_id, stream)
         await callback_query.message.reply_text(f"AI Player started - Now playing {selected_language} song")
 
     except Exception as e:
