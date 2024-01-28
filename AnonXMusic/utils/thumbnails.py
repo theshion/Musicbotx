@@ -111,13 +111,13 @@ async def get_thumb(videoid, user_id, chat_id):
         
         background.paste(group_pic_resized, (47, 154), mask=group_pic_resized)
         background.paste(image5, (0, 0), mask=image5)
-        background.paste(user_pic_resized, (290, 403), mask=user_pic_resized)
+        background.paste(user_pic_resized, (290, 401), mask=user_pic_resized)
         
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/Orbitron-Bold.ttf", 30)
         dur = ImageFont.truetype("AnonXMusic/assets/title.ttf", 30)
         onfont = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
-        font = ImageFont.truetype("AnonXMusic/assets/cloudb.otf", 35)
+        font = ImageFont.truetype("AnonXMusic/assets/Cloudb.otf", 35)
         draw.text((1037, 10), unidecode(app.name), fill="white", font=onfont)
         draw.text(
             (50, 642),
