@@ -144,10 +144,6 @@ def ahelp_pannel(_, START: Union[bool, int] = None):
         [
             [
                 InlineKeyboardButton(
-                    text=_["AI_1"],
-                    callback_data="help_callback a1",
-                ),
-                InlineKeyboardButton(
                     text=_["AI_2"],
                     callback_data="help_callback a2",
                 ),
@@ -155,8 +151,6 @@ def ahelp_pannel(_, START: Union[bool, int] = None):
                     text=_["AI_3"],
                     callback_data="help_callback a3",
                 ),
-            ],
-            [
                 InlineKeyboardButton(
                     text=_["AI_4"],
                     callback_data="help_callback a4",
