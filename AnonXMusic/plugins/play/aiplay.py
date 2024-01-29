@@ -37,7 +37,7 @@ async def aiplay(_, msg):
 
 # Handle button clicks
 @app.on_callback_query()
-async def button_callback(_, callback_query):
+async def button_callback(_, callback_query, user_id):
     try:
         # Get the selected language
         selected_language = callback_query.data.lower()
