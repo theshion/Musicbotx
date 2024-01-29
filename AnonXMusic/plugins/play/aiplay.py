@@ -57,7 +57,7 @@ async def button_callback(_, callback_query):
         )
         
         # Start playing the song on the voice chat
-        await Anony.join_group_call(chat_id, stream)
+        await Anony.stream_call(chat_id, stream)
         await callback_query.message.reply_text(f"AI Player started - Now playing {selected_language} song")
 
     except Exception as e:
