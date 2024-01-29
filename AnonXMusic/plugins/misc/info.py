@@ -16,7 +16,7 @@ gban_db = BANNED_USERS
 button = InlineKeyboardMarkup([
             [
             InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇꜱ", url="https://t.me/NoahMusicupdates"),
-            InlineKeyboardButton("ᴄʟᴏꜱᴇ", callback_data="close_data")            
+            InlineKeyboardButton("ᴄʟᴏꜱᴇ", callback_data=f"close")            
                               ]
 ])
 
