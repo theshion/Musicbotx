@@ -41,8 +41,8 @@ async def start_pm(client, message: Message, _):
             await sudoers_list(client=client, message=message, _=_)
             if await is_on_off(2):
                 return await app.send_message(
-                    chat_id=config.LOGGER_ID,
-                    text=f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>sᴜᴅᴏʟɪsᴛ</b>.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
+                    chat_id=config.LOGS_ID,
+                    text=f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>sᴜᴅᴏʟɪsᴛ</b>\n\n⬝ <b>ɴᴀᴍᴇ -</b> <code>{message.from_user.first_name}</code>\n⬝ <b>ᴜsᴇʀ ɪᴅ -</b> <code>{message.from_user.id}</code>\n⬝ <b>ᴜsᴇʀɴᴀᴍᴇ -</b> @{message.from_user.username}",
                 )
             return
         if name[0:3] == "inf":
@@ -78,7 +78,7 @@ async def start_pm(client, message: Message, _):
             )
             if await is_on_off(2):
                 return await app.send_message(
-                    chat_id=config.LOGGER_ID,
+                    chat_id=config.LOGS_ID,
                     text=f"⎌ <b><u>ɴᴇᴡ ᴜꜱᴇʀ ᴄʜᴇᴄᴋ ᴛʀᴀᴄᴋ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ.</u></b>\n\n⬝ <b>ᴜꜱᴇʀ</b> - {message.from_user.mention}.\n⬝ <b>ɴᴀᴍᴇ</b> - {message.from_user.first_name}\n⬝ <b>ᴜ-ɪᴅ - </b> <code>{message.from_user.id}</code>\n⬝ <b> ᴜsᴇʀɴᴀᴍᴇ - </b> @{message.from_user.username}",
                 )
     else:
@@ -90,7 +90,7 @@ async def start_pm(client, message: Message, _):
         )
         if await is_on_off(2):
             return await app.send_message(
-                chat_id=config.LOGGER_ID,
+                chat_id=config.LOGS_ID,
                 text=f"⎌ <b><u>ɴᴇᴡ ᴜꜱᴇʀ ꜱᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.</u></b>\n\n⬝ <b>ᴜꜱᴇʀ</b> - {message.from_user.mention}.\n⬝ <b>ɴᴀᴍᴇ</b> - {message.from_user.first_name}\n⬝ <b>ᴜ-ɪᴅ - </b><code>{message.from_user.id}</code>\n⬝ <b>ᴜsᴇʀɴᴀᴍᴇ - </b>@{message.from_user.username}",
             )
 
