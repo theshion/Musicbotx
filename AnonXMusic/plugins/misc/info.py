@@ -94,12 +94,10 @@ async def userinfo(_, message):
     chat_id = message.chat.id
     user_id = message.from_user.id
             
-    msg = await message.reply_text("**ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ⬖**")   
-    await msg.edit_text("ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ⬝") 
+    msg = await message.reply_text("ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ.")   
+    await msg.edit_text("ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ..") 
 
-    await msg.edit_text("ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ⬝⬝") 
-
-    await msg.edit_text("ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ⬝⬝⬝")        
+    await msg.edit_text("ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ...")       
 
     if not message.reply_to_message and len(message.command) == 2:
         try:
@@ -116,8 +114,10 @@ async def userinfo(_, message):
             bio = user_info.bio
             ai = user.is_bot   
             riyal = user.is_premium        
-            gbanned_info = user.id in gban_db
-            gban = gbanned_info[0] if gbanned_info else False         
+            if user.id in gban_db:
+                gban = "True"
+            else:
+                gban = "False"    
             premium = user.is_verified
             restricted = user.is_restricted
             if user.photo:
@@ -153,8 +153,10 @@ async def userinfo(_, message):
             bio = user_info.bio
             ai = user.is_bot
             riyal = user.is_premium        
-            gbanned_info = user.id in gban_db
-            gban = gbanned_info[0] if gbanned_info else False
+            if user.id in gban_db:
+                gban = "True"
+            else:
+                gban = "False"
             premium = user.is_verified
             restricted = user.is_restricted        
             if user.photo:
@@ -192,8 +194,10 @@ async def userinfo(_, message):
             bio = user_info.bio
             ai = user.is_bot
             riyal = user.is_premium
-            gbanned_info = user.id in gban_db
-            gban = gbanned_info[0] if gbanned_info else False         
+            if user.id in gban_db:
+                gban = "True"
+            else:
+                gban = "False"        
             premium = user.is_verified
             restricted = user.is_restricted 
             if user.photo:
