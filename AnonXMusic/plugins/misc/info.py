@@ -16,7 +16,7 @@ gban_db = BANNED_USERS
 
 button = InlineKeyboardMarkup([
             [
-            InlineKeyboardButton("ɢʀᴀᴅᴇꜱ", url="https://t.me/gojo_satoru_updates"),
+            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇꜱ", url="https://t.me/NoahMusicupdates"),
             InlineKeyboardButton("ᴄʟᴏꜱᴇ", callback_data="close_data")            
                               ]
 ])
@@ -27,7 +27,7 @@ button = InlineKeyboardMarkup([
 
 INFO_TEXT = """
 ╶╴╺╸╶╴╺╸╶╴╺╸╶╴╺╸╶╴╺╸╶╴
-**ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ⥮**
+<b>ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ⥮</b>
 
 ⬝ ᴜsᴇʀ ɪᴅ - `{}`
 ⬝ ɴᴀᴍᴇ - {}
@@ -36,7 +36,7 @@ INFO_TEXT = """
 ⬝ ʀᴇꜱᴛʀɪᴄᴛɪᴏɴ - {}
 ⬝ ᴠᴇʀɪꜰɪᴇᴅ - {}
 ⬝ ʙᴏᴛ - {}
-⬝ ɢʀᴀᴅᴇꜱ - `{}`
+⬝ ꜱᴛᴀᴛᴜꜱ - `{}`
 
 ⬝ ᴘʀᴇᴍɪᴜᴍ - {}
 
@@ -55,15 +55,15 @@ async def usergrade(user_id):
       user = await Yumikoo.get_users(user_id)
       user_id = user.id         
       if user_id == OWNER_ID:
-         return "ᴛʜɪꜱ ᴜꜱᴇʀ ɪꜱ  ɢʀᴀᴅᴇ ꜱᴏʀᴄᴇʀᴇʀ."
+         return "ᴛʜɪꜱ ɢᴜʏ ɪꜱ ᴀ ᴘʀᴇᴍɪᴜᴍ ᴜꜱᴇʀ."
       elif user_id == SUDO_USERS:
-         return "ᴛʜᴇ ɢʀᴀᴅᴇ ʟᴇᴠᴇʟ ᴏꜰ ᴛʜɪꜱ ᴜꜱᴇʀ ɪꜱ 1ꜱᴛ ɢʀᴀᴅᴇ ꜱᴏʀᴄᴇʀᴇʀ."
+         return "ᴛʜɪꜱ ɢᴜʏ ɪꜱ ᴀ ʟɪꜱᴛᴇɴᴇʀ ʙᴜᴛ ᴀʟꜱᴏ ᴀ ꜱᴜᴘᴘᴏʀᴛᴇʀ."
       elif user_id != OWNER_ID:
-         return "ᴛʜɪꜱ ᴜꜱᴇʀ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴀɴʏ ᴀᴄᴄᴇꜱꜱ ᴏꜰ ɢʀᴀᴅᴇꜱ"
+         return "ᴛʜɪꜱ ɢᴜʏ ɪꜱ ᴊᴜꜱᴛ ᴀɴ ᴀᴠᴇʀᴀɢᴇ ʟɪꜱᴛᴇɴᴇʀ."
       elif user_id != SUDO_USERS:
-         return "ᴛʜɪꜱ ᴜꜱᴇʀ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴀɴʏ ᴀᴄᴄᴇꜱꜱ ᴏꜰ ɢʀᴀᴅᴇꜱ."  
+         return "ᴛʜɪꜱ ɢᴜʏ ɪꜱ ᴊᴜꜱᴛ ᴀɴ ᴀᴠᴇʀᴀɢᴇ ʟɪꜱᴛᴇɴᴇʀ."  
       elif user_id == 6116157753:
-         return "ʟᴏʟ ᴅᴜᴅᴇ ɪ'ᴍ ᴛʜᴇ ʜᴏɴᴏʀᴇᴅ ᴏɴᴇ."           
+         return "ʟᴏʟ ɪᴛ'ꜱ ᴍᴇ ᴛʜᴇ ꜱᴛʀᴇᴀᴍᴇʀ."           
    except:
         return "None"
                
@@ -81,7 +81,7 @@ async def userstatus(user_id):
       elif x == enums.UserStatus.LONG_AGO:
           return "ᴜꜱᴇʀ ʟᴀꜱᴛ ꜱᴇᴇɴ ᴡᴀꜱ ʟᴏɴɢ ᴛɪᴍᴇ ᴀɢᴏ."
       elif x == enums.UserStatus.OFFLINE:
-          return "ᴜꜱᴇʀ ɪꜱ ᴏꜰꜰʟɪɴᴇ ."
+          return "ᴜꜱᴇʀ ɪꜱ ᴏꜰꜰʟɪɴᴇ."
       elif x == enums.UserStatus.ONLINE:
          return "ᴜꜱᴇʀ ɪꜱ ᴏɴʟɪɴᴇ."
    except:
@@ -99,7 +99,8 @@ async def userinfo(_, message):
     await msg.edit_text("ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ⬝") 
 
     await msg.edit_text("ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ⬝⬝") 
-       
+
+    await msg.edit_text("ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ⬝⬝⬝")        
 
     if not message.reply_to_message and len(message.command) == 2:
         try:
