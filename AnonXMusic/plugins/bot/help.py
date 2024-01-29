@@ -30,8 +30,9 @@ async def helper_private(
         language = await get_lang(chat_id)
         _ = get_string(language)
         keyboard = help_pannel(_, True)
+        roj = InlineKeyboardMarkup(keyboard)
         await update.edit_message_text(
-            _["chelp_1"], reply_markup=keyboard
+            _["chelp_1"], reply_markup=roj
         )
     else:
         try:
@@ -116,8 +117,9 @@ async def helper_private(
         language = await get_lang(chat_id)
         _ = get_string(language)
         keyboard = ahelp_pannel(_, True)
+        roj = InlineKeyboardMarkup(keyboard)
         await update.edit_message_text(
-            _["ahelp_1"], reply_markup=keyboard
+            _["ahelp_1"], reply_markup=roj
         )
     else:
         try:
