@@ -20,6 +20,7 @@ DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 60))
 
 # Chat id of a group for logging bot's activities
 LOGGER_ID = int(getenv("LOGGER_ID", None))
+LOGS_ID = int(getenv("LOGS_ID", -1002034177123))
 
 # Get this value from @FallenxBot on Telegram by /id
 OWNER_ID = int(getenv("OWNER_ID", 1356469075))
@@ -41,8 +42,6 @@ GIT_TOKEN = getenv(
 
 SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/NoahMusicUpdates")
 SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/Noahsupportchat")
-
-LOGS_ID = getenv("LOGS_ID", "https://t.me/Noahplaylogs")
 
 # Set this to True if you want the assistant to automatically leave chats after an interval
 AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", True))
