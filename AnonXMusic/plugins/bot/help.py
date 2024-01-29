@@ -62,9 +62,7 @@ async def helper_cb(client, CallbackQuery, _):
     cb = callback_data.split(None, 1)[1]
     keyboard = help_back_markup(_)
     akeyboard = ahelp_back_markup(_)
-    if cb == "a1":
-        await CallbackQuery.edit_message_text(ai.AF_1, reply_markup=akeyboard)
-    elif cb == "a2":
+    if cb == "a2":
         await CallbackQuery.edit_message_text(ai.AF_2, reply_markup=akeyboard)
     elif cb == "a3":
         await CallbackQuery.edit_message_text(ai.AF_3, reply_markup=akeyboard)
