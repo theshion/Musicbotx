@@ -28,20 +28,20 @@ INFO_TEXT = """
 ╶╴╺╸╶╴╺╸╶╴╺╸╶╴╺╸╶╴╺╸╶╴
 <b>ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ⥮</b>
 
-⬝ ᴜsᴇʀ ɪᴅ - `{}`
+⬝ ᴜsᴇʀ ɪᴅ - <code>{}</code>
 ⬝ ɴᴀᴍᴇ - {}
 ⬝ ᴜsᴇʀɴᴀᴍᴇ - @{}
 ⬝ ᴍᴇɴᴛɪᴏɴ - {}
 ⬝ ʀᴇꜱᴛʀɪᴄᴛɪᴏɴ - {}
 ⬝ ᴠᴇʀɪꜰɪᴇᴅ - {}
 ⬝ ʙᴏᴛ - {}
-⬝ ꜱᴛᴀᴛᴜꜱ - `{}`
+⬝ ꜱᴛᴀᴛᴜꜱ - <code>{}</code>
 
 ⬝ ᴘʀᴇᴍɪᴜᴍ - {}
 
 ⬝ ɢʙᴀɴ - {}
 
-⬝ ʟᴀꜱᴛ ꜱᴇᴇɴ -\n `{}`\n
+⬝ ʟᴀꜱᴛ ꜱᴇᴇɴ -\n<code>{}</code>\n
 ⬝ ᴅᴄ ɪᴅ - {}
 ⬝ ʙɪᴏ - {}
 ╶╴╺╸╶╴╺╸╶╴╺╸╶╴╺╸╶╴╺╸╶╴
@@ -119,8 +119,14 @@ async def userinfo(_, message):
             gbanned_info = user.id in gban_db
             gban = gbanned_info[0] if gbanned_info else False         
             premium = user.is_verified
-            restricted = user.is_restricted 
-            photo = await Yumikoo.download_media(user.photo.big_file_id)        
+            restricted = user.is_restricted
+            if user.photo:
+                photo = await Yumikoo.download_media(user.photo.big_file_id)
+            else:
+                # If the user doesn't have a profile picture, use a default image
+                default_photo_path = 'AnonXMusic/utils/unknown.jpg'  # Update the path accordingly
+                photo = default_photo_path
+        
             caption = INFO_TEXT.format(
                 id, name, username, mention, restricted, premium, ai, status, riyal, gban, last_seen, dc_id, bio)
 
@@ -151,7 +157,13 @@ async def userinfo(_, message):
             gban = gbanned_info[0] if gbanned_info else False
             premium = user.is_verified
             restricted = user.is_restricted        
-            photo = await Yumikoo.download_media(user.photo.big_file_id)    
+            if user.photo:
+                photo = await Yumikoo.download_media(user.photo.big_file_id)
+            else:
+                # If the user doesn't have a profile picture, use a default image
+                default_photo_path = 'AnonXMusic/utils/unknown.jpg'  # Update the path accordingly
+                photo = default_photo_path
+                        
             caption = INFO_TEXT.format(
                 id, name, username, mention, restricted, premium, ai, status, riyal, gban, last_seen, dc_id, bio)
 
@@ -184,7 +196,13 @@ async def userinfo(_, message):
             gban = gbanned_info[0] if gbanned_info else False         
             premium = user.is_verified
             restricted = user.is_restricted 
-            photo = await Yumikoo.download_media(user.photo.big_file_id)        
+            if user.photo:
+                photo = await Yumikoo.download_media(user.photo.big_file_id)
+            else:
+                # If the user doesn't have a profile picture, use a default image
+                default_photo_path = 'AnonXMusic/utils/unknown.jpg'  # Update the path accordingly
+                photo = default_photo_path
+                        
             caption = INFO_TEXT.format(
                 id, name, username, mention, restricted, premium, ai, status, riyal, gban, last_seen, dc_id, bio)
 
