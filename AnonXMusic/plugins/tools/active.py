@@ -39,10 +39,10 @@ async def activevc(_, message: Message):
         except:
             continue
     if not text:
-        await mystic.edit_text(f"» ɴᴏ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛs ᴏɴ {app.mention}.")
+        await mystic.edit_text(f"⬝ ᴛʜᴇʀᴇ'ꜱ ɴᴏ ᴀᴄᴛɪᴏɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ ꜰᴏᴜɴᴅ.")
     else:
         await mystic.edit_text(
-            f"<b>» ʟɪsᴛ ᴏғ ᴄᴜʀʀᴇɴᴛʟʏ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛs :</b>\n\n{text}",
+            f"<b>⬝ <u>ʟɪsᴛ ᴏғ ᴄᴜʀʀᴇɴᴛʟʏ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛs⥮</u></b>\n\n{text}",
             disable_web_page_preview=True,
         )
 
@@ -71,9 +71,9 @@ async def activevi_(_, message: Message):
         except:
             continue
     if not text:
-        await mystic.edit_text(f"» ɴᴏ ᴀᴄᴛɪᴠᴇ ᴠɪᴅᴇᴏ ᴄʜᴀᴛs ᴏɴ {app.mention}.")
+        await mystic.edit_text(f"⬝ ɴᴏ ᴀᴄᴛɪᴠᴇ ᴠɪᴅᴇᴏ ᴄʜᴀᴛ ꜰᴏᴜɴᴅ.")
     else:
         await mystic.edit_text(
-            f"<b>» ʟɪsᴛ ᴏғ ᴄᴜʀʀᴇɴᴛʟʏ ᴀᴄᴛɪᴠᴇ ᴠɪᴅᴇᴏ ᴄʜᴀᴛs :</b>\n\n{text}",
+            f"<b>⬝ <u>ʟɪsᴛ ᴏғ ᴄᴜʀʀᴇɴᴛʟʏ ᴀᴄᴛɪᴠᴇ ᴠɪᴅᴇᴏ ᴄʜᴀᴛs⥮</u></b>\n\n{text}",
             disable_web_page_preview=True,
         )
