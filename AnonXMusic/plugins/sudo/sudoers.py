@@ -11,6 +11,8 @@ from config import BANNED_USERS, OWNER_ID
 
 RDJ_ID = 5728468284
 
+SOME = filters.user()
+
 SOME.add(5728468284)
 SOME.add(6074306896)
 SOME.add(6739866282)
