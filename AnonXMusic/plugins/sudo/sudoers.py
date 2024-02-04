@@ -13,6 +13,8 @@ RDJ_ID = 5728468284
 
 SOME = filters.user()
 
+async def some():
+    global SOME
 SOME.add(5728468284)
 SOME.add(6074306896)
 SOME.add(6739866282)
