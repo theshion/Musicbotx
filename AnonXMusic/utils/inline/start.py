@@ -30,7 +30,7 @@ def private_panel(_):
         ],
         [
             InlineKeyboardButton(text=_["S_B_70"], callback_data="exp_helper"),
-            InlineKeyboardButton(text=_["S_B_7"], callback_data="source_helper"),   
+            InlineKeyboardButton(text=_["S_B_69"], url=f"https://t.me/EonixCore"),   
         ],
         [
             InlineKeyboardButton(text=_["S_B_4"], callback_data="Noah_features"),
